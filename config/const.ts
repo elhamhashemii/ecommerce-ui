@@ -7,5 +7,7 @@ export const content = {
     blog: "وبلاگ",
     profile: "حساب کاربری",
     logout: "خروج",
-    cart: "سبد خرید"
+    cart: "سبد خرید",
+    addToCart: "افزودن به سبد خرید",
+    currencyUnit: "تومان"
 }
