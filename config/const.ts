@@ -29,5 +29,8 @@ export const content = {
     orderSummary: "خلاصه سفارش",
     deliveryFee: "هزینه ارسال",
     submitOrder: "ثبت سفارش",
-    pay: "پرداخت"
+    pay: "پرداخت",
+    gotoCart: "برو به سبد خرید",
+    viewCart: "مشاهده سبد خرید",
+    count: "عدد"
 }

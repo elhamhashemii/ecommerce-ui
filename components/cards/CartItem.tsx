@@ -9,11 +9,11 @@ import DeleteCartItemButton from "../buttons/DeleteCartItemButton";
 
 interface IProps {
     item: CartItemType;
-    className?: string
+    className?: string;
 }
 
 export default function CartItem(props: IProps) {
-    const { item, className } = props;
+    const { item, className = undefined } = props;
 
     
     return <div className={`flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 ${className}`}>
@@ -28,7 +28,6 @@ export default function CartItem(props: IProps) {
         </div>
         <div className="flex md:flex-col items-center justify-between md:justify-end md:gap-8">
             <DeleteCartItemButton product={item} />
-            {/* <QuantityButton isCompact qty={item.qty} onAdd={() => {}} onRemove={() => {}} /> */}
         </div>
     </div>
 }

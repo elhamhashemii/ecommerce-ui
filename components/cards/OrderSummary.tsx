@@ -5,19 +5,28 @@ import { useCartStore } from "@/store/cartStore";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import { Button } from "@heroui/button";
 import { Card, CardBody, CardHeader } from "@heroui/card";
+import { useEffect, useState } from "react";
 
 interface IProps {
     deliveryFee: number;
+    className?: string;
 }
 
 export default function OrderSummaryCard(props: IProps) {
-    const { deliveryFee } = props;
+    const { deliveryFee, className } = props;
     const totalSum = useCartStore((state) => state.getTotalPrice())
+    const [mounted, setMounted] = useState(false)
 
     const totalPayable = totalSum + deliveryFee
 
 
-    return <Card className="mr-4 p-4" shadow="sm">
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if(!mounted) return null;
+
+    return <Card className={`p-4 ${className}`} shadow="sm">
     <CardHeader className="font-semibold">{content.orderSummary}</CardHeader>
     <CardBody>
         <div className="text-sm flex items-center justify-between w-full">
