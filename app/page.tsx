@@ -1,8 +1,5 @@
-import ProductCard from "@/components/cards/ProductCard";
 import SampleSlider from "@/components/sliders/SampleSlider";
-import Product1 from "../public/product (1).jpg"
-import Product2 from "../public/product (2).jpg"
-import ProductsGroup from "@/components/grids/ProductsGroup";
+import ProductsGroup from "@/components/lists/ProductsGroup";
 import { ProductType } from "@/types/product";
 
 async function fetchProducts() {
@@ -20,14 +17,14 @@ export default async function Home() {
       title: "ماژیک هایلایتر Panter رنگ یاسی Original - Made In Korea",
       category: "نام دسته بندی",
       price: 75000,
-      img: Product1
+      img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg"
     },
     { 
       id: 2,
       title: "ماژیک هایلایتر Panter رنگ یاسی Original - Made In Korea",
       category: "نام دسته بندی",
       price: 145000,
-      img: Product2
+      img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg"
     },
   ]
 

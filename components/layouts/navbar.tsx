@@ -15,6 +15,8 @@ import clsx from "clsx";
 import { RiSearch2Line } from "react-icons/ri";
 import { siteConfig } from "@/config/site";
 import { content } from "@/config/const";
+import { Button } from "@heroui/button";
+  import CartButton from "../buttons/CartButton";
 
 
 export const Navbar = () => {
@@ -61,17 +63,26 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/4 sm:basis-full"
+        className="hidden sm:flex justify-end basis-1/4 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden lg:flex w-full">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:flex basis-4/6">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:block">
+          <Button variant="bordered" size="sm" color="primary" className="text-xs font-semibold">{content.login} / {content.signup}</Button>
+        </NavbarItem>
+        <NavbarItem className="hidden lg:block">
+          <CartButton />
+        </NavbarItem>
       </NavbarContent>
 
+
+      {/* Mobile Drawer Button */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu>
+      {/* Mobile Drawer Menu */}
+      <NavbarMenu className="bg-white">
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (

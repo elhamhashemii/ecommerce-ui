@@ -4,6 +4,7 @@ import AddToCartButton from "../buttons/AddToCart";
 import Link from "next/link";
 import { ProductType } from "@/types/product";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
+import { useCartStore } from "@/store/cartStore";
 
 interface ProductCardProps {
     product: ProductType;
@@ -12,6 +13,8 @@ interface ProductCardProps {
 export default function ProductCard(props: ProductCardProps) {
     const { product } = props;
     const { id, img, title, category, price } = product;
+
+
 
     return <Card shadow="sm" radius="sm" className="flex flex-col items-center justify-center mb-4 break-inside-avoid overflow-hidden">
             <CardBody className="flex items-stretch justify-center">
@@ -22,7 +25,7 @@ export default function ProductCard(props: ProductCardProps) {
                 <Link href={`/product/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{title}</Link>
                 <div className="text-gray-800">{PriceFormatter(price)}</div>
                 <div className="flex items-center justify-center w-full gap-2 my-2">
-                    <AddToCartButton />
+                    <AddToCartButton product={product} />
                 </div>
             </CardFooter>
         </Card>

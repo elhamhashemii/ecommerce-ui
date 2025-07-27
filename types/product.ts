@@ -7,3 +7,11 @@ export type ProductType = {
     category: string;
     price: number;
 }
+
+export type CartItemType = {
+    id: number
+    title: string
+    price: number
+    qty: number
+    img: string | StaticImageData | any;
+  }

@@ -1,18 +1,46 @@
 "use client";
 
 import { content } from "@/config/const";
-import { Button, ButtonGroup } from "@heroui/button";
-import { useState } from "react";
-import { TbMinus, TbPlus, TbShoppingCart } from "react-icons/tb";
+import { useCartStore } from "@/store/cartStore";
+import { ProductType } from "@/types/product";
+import { Button } from "@heroui/button";
+import { useEffect, useState } from "react";
+import { TbShoppingCart } from "react-icons/tb";
+import QuantityButton from "./QuantityButton";
 
-export default function AddToCartButton() {
-  const [qty, setQty] = useState(0);
+interface IProps {
+  product: ProductType;
+}
 
-  const handleAddToCart = () => setQty(1);
-  const handleAdd = () => setQty(prev => prev + 1);
-  const handleMinus = () => setQty(prev => Math.max(prev - 1, 0));
+export default function AddToCartButton(props: IProps) {
+  const { product } = props;
+  const cartItem = useCartStore((state) =>
+    state.items.find((item) => item.id === product.id)
+  );
+
+
+  const [qty, setQty] = useState(cartItem?.qty ?? 0);
+  const addItem = useCartStore((s) => s.addItem)
+  const updateQty = useCartStore((s) => s.updateQty)
+
+  const handleAddToCart = () => {
+    setQty(1)
+    addItem({ id: product.id, title: product.title, price: product.price, qty: 1, img: product.img })
+  };
+  const handleAdd = () => {
+    setQty(prev => prev + 1)
+    updateQty(product.id, qty + 1)
+  };
+  const handleRemove = () => {
+    setQty(prev => Math.max(prev - 1, 0))
+    updateQty(product.id, qty - 1)
+  };
 
   const isAdded = qty > 0;
+
+  useEffect(() => {
+    setQty(cartItem?.qty ?? 0);
+  }, [cartItem?.qty]);
 
   return (
     <div className="w-full flex justify-center">
@@ -28,16 +56,7 @@ export default function AddToCartButton() {
           {content.addToCart}
         </Button>
       ) : (
-        <ButtonGroup
-          className="w-[70%] max-w-xs font-bold"
-          color="primary"
-          variant="bordered"
-          size="sm"
-        >
-          <Button className="px-0 min-w-12" startContent={<TbPlus size={16} />} onPress={handleAdd} />
-          <Button className="hover:cursor-auto text-lg font-semibold">{qty}</Button>
-          <Button className="px-0 min-w-12" startContent={<TbMinus size={16} />} onPress={handleMinus} isDisabled={qty === 0} />
-        </ButtonGroup>
+        <QuantityButton qty={qty} onAdd={handleAdd} onRemove={handleRemove} />
       )}
     </div>
   );
