@@ -1,6 +1,7 @@
 import SampleSlider from "@/components/sliders/SampleSlider";
 import ProductsGroup from "@/components/lists/ProductsGroup";
 import { ProductType } from "@/types/product";
+import { productsData } from "@/config/const";
 
 async function fetchProducts() {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -8,30 +9,14 @@ async function fetchProducts() {
   return res.json();
 }
 
+
 export default async function Home() {
   const products = await fetchProducts();
-
-  const items: ProductType[] = [
-    { 
-      id: 1,
-      title: "ماژیک هایلایتر Panter رنگ یاسی Original - Made In Korea",
-      category: "نام دسته بندی",
-      price: 75000,
-      img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg"
-    },
-    { 
-      id: 2,
-      title: "ماژیک هایلایتر Panter رنگ یاسی Original - Made In Korea",
-      category: "نام دسته بندی",
-      price: 145000,
-      img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg"
-    },
-  ]
 
   return (
     <section className="w-full flex flex-col items-center justify-center gap-4">
       <SampleSlider />
-      <ProductsGroup products={items} />
+      <ProductsGroup className="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" products={productsData} />
       <div className="w-full bg-amber-500 flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         Slider
       </div>

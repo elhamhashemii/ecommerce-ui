@@ -1,6 +1,6 @@
 "use client";
 
-import { content } from "@/config/const";
+import { content } from "@/config/content";
 import { useCartStore } from "@/store/cartStore";
 import { ProductType } from "@/types/product";
 import { Button } from "@heroui/button";

@@ -1,4 +1,4 @@
-import { content } from "@/config/const";
+import { content } from "@/config/content";
 import { CartItemType } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";

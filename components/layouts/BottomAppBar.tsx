@@ -1,6 +1,6 @@
 "use client"
 
-import { content } from "@/config/const"
+import { content } from "@/config/content"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";

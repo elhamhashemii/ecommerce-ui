@@ -4,12 +4,9 @@ import { useCartStore } from "@/store/cartStore";
 import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/dropdown";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TbShoppingCart } from "react-icons/tb";
-import CartItem from "../cards/CartItem";
-import { content } from "@/config/const";
-import Image from "next/image";
+import { content } from "@/config/content";
 import DropdownCartItem from "../cards/DropdownCartItem";
 
 

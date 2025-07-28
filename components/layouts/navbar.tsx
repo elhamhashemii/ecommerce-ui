@@ -14,27 +14,13 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { RiSearch2Line } from "react-icons/ri";
 import { siteConfig } from "@/config/site";
-import { content } from "@/config/const";
+import { content } from "@/config/content";
 import { Button } from "@heroui/button";
   import CartButton from "../buttons/CartButton";
+import SearchInput from "../forms/inputs/SearchInput";
 
 
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      labelPlacement="outside"
-      placeholder={content.search + "..."}
-      startContent={
-        <RiSearch2Line />
-      }
-      type="search"
-    />
-  );
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
@@ -66,7 +52,7 @@ export const Navbar = () => {
         className="hidden sm:flex justify-end basis-1/4 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden lg:flex basis-4/6">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:flex basis-4/6"><SearchInput /></NavbarItem>
         <NavbarItem className="hidden lg:block">
           <Button variant="bordered" size="sm" color="primary" className="text-xs font-semibold">{content.login} / {content.signup}</Button>
         </NavbarItem>
@@ -83,7 +69,7 @@ export const Navbar = () => {
 
       {/* Mobile Drawer Menu */}
       <NavbarMenu className="bg-white">
-        {searchInput}
+        <SearchInput />
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

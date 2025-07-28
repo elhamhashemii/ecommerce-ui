@@ -1,6 +1,6 @@
 "use client"
 
-import { content } from "@/config/const";
+import { content } from "@/config/content";
 import { useCartStore } from "@/store/cartStore";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import { Button } from "@heroui/button";
@@ -43,7 +43,7 @@ export default function OrderSummaryCard(props: IProps) {
             <div className="font-semibold">{PriceFormatter(totalPayable)}</div>
         </div>
 
-        <Button className="mt-4 bg-black text-white">{content.submitOrder} {content.and} {content.pay}</Button>
+        <Button className="mt-4 bg-black text-white">{content.submitOrder}</Button>
     </CardBody>
 </Card>
 }

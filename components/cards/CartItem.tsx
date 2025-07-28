@@ -1,4 +1,4 @@
-import { content } from "@/config/const";
+import { content } from "@/config/content";
 import { CartItemType } from "@/types/product";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import Image from "next/image";
@@ -16,9 +16,9 @@ export default function CartItem(props: IProps) {
     const { item, className = undefined } = props;
 
     
-    return <div className={`flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 ${className}`}>
+    return <div className={`flex flex-row items-center justify-between md:gap-4 ${className}`}>
         <div>
-            <Image src={item.img} width={150} height={150} alt="product" className="rounded-[8px] w-full" />
+            <Image src={item.img} width={120} height={120} alt="product" className="rounded-[8px] w-full hidden md:block" />
         </div>
         <div className="w-full">
             <Link href={`/product/${item.id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{item.title}</Link>

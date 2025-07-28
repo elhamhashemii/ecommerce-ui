@@ -1,5 +1,5 @@
 import { TbBrandInstagram, TbBrandTelegram, TbBrandWhatsapp, TbPhoneCall } from "react-icons/tb";
-import { content } from "./const";
+import { content } from "./content";
 
 export type SiteConfig = typeof siteConfig;
 
