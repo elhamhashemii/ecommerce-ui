@@ -1,3 +1,7 @@
+import SampleSlider from "@/components/sliders/SampleSlider";
+
 export default function ShopPage() {
-    return <div>SHOP</div>
+    return <div>
+        <SampleSlider />
+    </div>
 }
