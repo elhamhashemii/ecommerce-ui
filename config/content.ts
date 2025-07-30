@@ -3,7 +3,7 @@ export const content = {
     home: "صفحه اصلی",
     shop: "فروشگاه",
     about: "درباره ما",
-    contact: "تماس با ما",
+    contact: "ارتباط با ما",
     blog: "وبلاگ",
     profile: "حساب کاربری",
     logout: "خروج",

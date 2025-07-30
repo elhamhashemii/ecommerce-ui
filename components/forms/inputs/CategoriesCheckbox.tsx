@@ -1,5 +1,6 @@
+import { debounce } from "@/utils/helpers/debounce";
 import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface IProps {
     onSelect: (selctedCategories: string[]) => void;
@@ -9,9 +10,17 @@ export default function CategoriesCheckbox(props: IProps) {
     const { onSelect } = props;
     const [selected, setSelected] = useState(["buenos-aires", "sydney"]);
 
+    const debouncedSearch = useCallback(
+        debounce((value: string[]) => {
+            onSelect(value)
+        }, 1000),
+        []
+      );
+
+
     function handleChange(val: string[]) {
         setSelected(val)
-        onSelect(val)
+        debouncedSearch(val)
     }
 
     return <CheckboxGroup
