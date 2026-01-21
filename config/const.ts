@@ -1,3 +1,5 @@
+import { BlogType } from "@/types/blog"
+
 export const productsData = [
     {
       "id": 1,
@@ -700,3 +702,38 @@ export const productsData = [
       "img": "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg"
     }
   ]
+
+export const blogsData: BlogType[] = [
+  {
+    id: 1,
+    title: "blog title",
+    intro: "intro",
+    content: "content",
+    img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg",
+    category: "category"
+  },
+  {
+    id: 2,
+    title: "blog title",
+    intro: "intro",
+    content: "content",
+    img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg",
+    category: "category"
+  },
+  {
+    id: 3,
+    title: "blog title",
+    intro: "intro",
+    content: "content",
+    img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg",
+    category: "category"
+  },
+  {
+    id: 4,
+    title: "blog title",
+    intro: "intro",
+    content: "content",
+    img: "https://media.worldofinteriors.com/photos/64e63665be3320b594bf6e12/4:3/w_1920,c_limit/WoI-Covets-Stationery_Cover.jpg",
+    category: "category"
+  },
+]

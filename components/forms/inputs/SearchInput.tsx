@@ -8,7 +8,7 @@ import { TbSearch } from "react-icons/tb";
 
 interface IProps {
     className?: string;
-    onChange: (input: string) => void
+    onChange?: (input: string) => void
 }
 
 export default function SearchInput(props: IProps) {
@@ -17,7 +17,7 @@ export default function SearchInput(props: IProps) {
 
     const debouncedSearch = useCallback(
         debounce((value: string) => {
-            onChange(value)
+            // onChange(value)
         }, 1000),
         []
       );

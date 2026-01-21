@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -8,22 +10,32 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
 import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { RiSearch2Line } from "react-icons/ri";
 import { siteConfig } from "@/config/site";
 import { content } from "@/config/content";
 import { Button } from "@heroui/button";
-  import CartButton from "../buttons/CartButton";
+import CartButton from "../buttons/CartButton";
 import SearchInput from "../forms/inputs/SearchInput";
+import { useRouter } from "next/navigation";
+import { TbUser } from "react-icons/tb";
 
 
 export const Navbar = () => {
+  const router = useRouter()
+  const storedUser = localStorage.getItem("user")
+
+  function routeToLogin() {
+    // router.push
+  }
+
+  function routeToProfile() {
+    // router.push
+  }
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <HeroUINavbar maxWidth="xl" position="sticky" className="mt-3">
       <NavbarContent className="basis-1/3 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -54,7 +66,26 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden lg:flex basis-4/6"><SearchInput /></NavbarItem>
         <NavbarItem className="hidden lg:block">
-          <Button variant="bordered" size="sm" color="primary" className="text-xs font-semibold">{content.login} / {content.signup}</Button>
+          {storedUser ?
+            <Button
+              onPress={routeToProfile}
+              variant="light"
+              size="sm"
+              className="text-xs font-semibold"
+              isIconOnly
+              startContent={<TbUser size={24} />}
+            />
+            :
+            <Button
+              onPress={routeToLogin}
+              variant="bordered"
+              size="sm"
+              color="primary"
+              className="text-xs font-semibold"
+            >
+              {content.login} / {content.signup}
+            </Button>
+          }
         </NavbarItem>
         <NavbarItem className="hidden lg:block">
           <CartButton />
@@ -75,9 +106,9 @@ export const Navbar = () => {
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
-                   index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
+                  index === siteConfig.navMenuItems.length - 1
+                    ? "danger"
+                    : "foreground"
                 }
                 href={item.href}
                 size="md"
