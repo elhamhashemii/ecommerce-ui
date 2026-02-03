@@ -17,9 +17,9 @@ interface IProps {
 
 export default function ProductsFilterCard(props: IProps) {
   const { className, cats } = props;
-  const [isAvailableOnly, setIsAvailableOnly] = useState()
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isAvailableOnly = searchParams.get("isAvailableOnly") === "true";
 
   function onPriceFilter(value: number[]) {
     console.log({ value })
@@ -51,17 +51,16 @@ export default function ProductsFilterCard(props: IProps) {
   }
 
 
-  function onChangeStock(selected: string[]) {
+  function onChangeStock(checked: boolean) {
     const params = new URLSearchParams(searchParams.toString());
-    if (selected.length === 0) {
+
+    if (checked) {
+      params.set("isAvailableOnly", "true");
+    } else {
       params.delete("isAvailableOnly");
     }
-    else {
-      params.set("isAvailableOnly", "true");
-    }
-    // reset page when filter changes
-    params.set("page", "1");
 
+    params.set("page", "1");
     router.push(`?${params.toString()}`);
   }
 
@@ -84,7 +83,11 @@ export default function ProductsFilterCard(props: IProps) {
       <PriceRangeFilter onFilter={onPriceFilter} isLoading={false} />
     </AccordionItem>
     <AccordionItem key="3" aria-label="Stock" title={<div className="text-sm font-semibold">{content.stock}</div>}>
-      <StockCheckbox onSelect={onChangeStock} />
+      {/* <StockCheckbox checked onSelect={onChangeStock} /> */}
+      <StockCheckbox
+        checked={isAvailableOnly}
+        onSelect={onChangeStock}
+      />
     </AccordionItem>
   </Accordion>
 }

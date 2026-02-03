@@ -40,11 +40,13 @@ export default function CategoriesCheckbox({
         <CheckboxGroup
             value={localSelected}
             onValueChange={handleChange}
+            className="pb-4"
         >
             {items.map(item => (
                 <Checkbox
                     key={item.id}
                     value={String(item.id)}
+                    size="sm"
                 >
                     {item.title}
                 </Checkbox>
