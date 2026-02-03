@@ -42,7 +42,7 @@ export default async function ShopPage({
 
                 <div className="w-full basis-3/4">
                     <div className="w-full flex flex-col md:flex-row items-start pb-4">
-                        <FilterChips className="!self-start w-full md:basis-11/12 text-start" />
+                        <FilterChips cats={cats} className="!self-start w-full md:basis-11/12 text-start" />
                         <SortBy className="!self-end text-end w-full md:basis-1/12" />
                     </div>
 

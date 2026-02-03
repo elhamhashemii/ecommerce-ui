@@ -1,34 +1,110 @@
 "use client";
 
+import { content } from "@/config/content";
 import { Chip } from "@heroui/chip";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface IProps {
-    className?: string;
+  className?: string;
+  cats: { id: number; title: string }[]; // pass all categories
 }
 
-export default function FilterChips(props: IProps) {
-  const { className } = props;
-  const initialFilters = ["Category", "Price", "Search Input"];
-  const [chips, setChips] = useState<string[]>(initialFilters);
+export default function FilterChips({ className, cats }: IProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  function handleRemoveFilter(item: string) {
-    const newFilters = chips.filter((chip) => chip !== item);
-    setChips(newFilters);
+  const chips: { key: string; label: string }[] = [];
+
+  // 🟢 Categories: one chip per selected category
+  const categoryIds = searchParams.get("categoryIds");
+  if (categoryIds) {
+    const ids = categoryIds.split(",").map(Number).filter(Boolean);
+    ids.forEach(id => {
+      const cat = cats.find(c => c.id === id);
+      if (cat) {
+        chips.push({
+          key: `category-${id}`,
+          label: cat.title,
+        });
+      }
+    });
   }
 
+  // 🟢 Stock
+  if (searchParams.get("isAvailableOnly") === "true") {
+    chips.push({
+      key: "isAvailableOnly",
+      label: content.availableProductsOnly,
+    });
+  }
+
+  // 🟢 Search
+  const search = searchParams.get("search");
+  if (search) {
+    chips.push({
+      key: "search",
+      label: `Search: "${search}"`,
+    });
+  }
+
+  // 🟢 Price
+  const minPrice = searchParams.get("minPrice");
+  const maxPrice = searchParams.get("maxPrice");
+  if (minPrice || maxPrice) {
+    chips.push({
+      key: "price",
+      label: `Price`,
+    });
+  }
+
+  function removeFilter(key: string) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (key.startsWith("category-")) {
+      const idToRemove = key.replace("category-", "");
+      const remaining = (searchParams.get("categoryIds") ?? "")
+        .split(",")
+        .filter(id => id !== idToRemove);
+      if (remaining.length) {
+        params.set("categoryIds", remaining.join(","));
+      } else {
+        params.delete("categoryIds");
+      }
+    } else {
+      switch (key) {
+        case "isAvailableOnly":
+          params.delete("isAvailableOnly");
+          break;
+        case "search":
+          params.delete("search");
+          break;
+        case "price":
+          params.delete("minPrice");
+          params.delete("maxPrice");
+          break;
+      }
+    }
+
+    params.set("page", "1");
+    router.push(`?${params.toString()}`);
+  }
+
+  if (chips.length === 0) return null;
+
   return (
-    <div className={`flex-col md:flex-row items-start md:items-center justify-start md:justify-start gap-3 ${className} ${chips.length === 0 ? "hidden" : "flex"}`}>
-      <div className="hidden md:block">Applied Filters:</div>
-      <div className="flex flex-wrap gap-2 pb-4 md:pb-0">
-        {chips.map((item) => (
-            <Chip
-            key={item}
+    <div className={`flex flex-col md:flex-row gap-3 ${className}`}>
+      <div className="hidden md:block">نتیجه جستجو: </div>
+
+      <div className="flex flex-wrap gap-2">
+        {chips.map(chip => (
+          <Chip
+            size="sm"
+            key={chip.key}
             variant="bordered"
-            onClose={() => handleRemoveFilter(item)}
-            >
-            {item}
-            </Chip>
+            onClose={() => removeFilter(chip.key)}
+          >
+            {chip.label}
+          </Chip>
         ))}
       </div>
     </div>
