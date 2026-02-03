@@ -14,6 +14,7 @@ export const content = {
     signup: "ثبت نام",
     category: "دسته بندی",
     categories: "دسته بندی ها",
+    nodata: "نتیجه‌ای یافت نشد.",
     qty: "تعداد",
     price: "قیمت",
     priceRange: "محدوده قیمت",
