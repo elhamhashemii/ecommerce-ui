@@ -27,6 +27,7 @@ export default async function ShopPage({
         limit: 5,
         sort,
         categoryIds,
+        isAvailableOnly
     });
 
     const cats = await fetchCategories() as CategoryItem[]
