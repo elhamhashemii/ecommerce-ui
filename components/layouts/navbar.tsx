@@ -20,11 +20,13 @@ import CartButton from "../buttons/CartButton";
 import SearchInput from "../forms/inputs/SearchInput";
 import { useRouter } from "next/navigation";
 import { TbUser } from "react-icons/tb";
+import { useEffect, useState } from "react";
 
 
 export const Navbar = () => {
   const router = useRouter()
-  const storedUser = localStorage.getItem("user")
+  const [storedUser, setStoredUser] = useState<any>(null)
+
 
   function routeToLogin() {
     // router.push
@@ -33,6 +35,11 @@ export const Navbar = () => {
   function routeToProfile() {
     // router.push
   }
+
+  useEffect(() => {
+    const user = localStorage.getItem("user")
+    setStoredUser(user)
+  }, [])
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky" className="mt-3">

@@ -6,6 +6,8 @@ export type ProductType = {
     title: string;
     category: string;
     price: number;
+    stock: number
+    slug: string;
 }
 
 export type CartItemType = {

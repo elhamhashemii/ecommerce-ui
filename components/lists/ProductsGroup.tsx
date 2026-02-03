@@ -8,11 +8,12 @@ interface IProps {
 
 export default function ProductsGroup(props: IProps) {
   const { products, className } = props;
-    return (
-     <div className={`grid ${className} gap-x-4 [grid-template-rows:masonry]`}>
-        {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div className={`grid ${className} gap-x-4 [grid-template-rows:masonry]`}>
+      {products.length === 0 && <>No Products Found.</>}
+      {products.length > 0 && products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}

@@ -15,3 +15,24 @@ export async function requestOtp(phoneNumber: string) {
     body: JSON.stringify({ phoneNumber }),
   });
 }
+
+export async function fetchProducts(options?: {
+  page?: number, limit?: number, sort?: string, categoryIds?: number[], isAvailableOnly?: boolean;
+}) {
+  // return await fetcher("/products", { method: "GET" });
+  const params = new URLSearchParams();
+
+  Object.entries(options ?? {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      params.set(key, String(value));
+    }
+  });
+
+  return fetcher(`/products?${params.toString()}`, {
+    method: 'GET',
+  });
+}
+
+export async function fetchCategories() {
+  return fetcher("/categories", { method: "GET" })
+}

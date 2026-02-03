@@ -17,6 +17,8 @@ export const content = {
     qty: "تعداد",
     price: "قیمت",
     priceRange: "محدوده قیمت",
+    stock: "موجودی",
+    availableProductsOnly: "فقط کالاهای موجود",
     unitPrice: "قیمت واحد",
     totalPrice: "قیمت کل",
     totalPayable: "مبلغ قابل پرداخت",
@@ -56,5 +58,6 @@ export const content = {
     bestSeller: "پرفروش ترین",
     filter: "فیلتر  ",
     emptyCart: "سبد خرید خالی است",
-    shopNow: "خرید کن ببه"
+    shopNow: "خرید کن ببه",
+    outOfStock: "ناموجود"
 }

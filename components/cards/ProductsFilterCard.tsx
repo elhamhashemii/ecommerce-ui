@@ -4,37 +4,87 @@ import { Accordion, AccordionItem } from "@heroui/accordion";
 import SearchInput from "../forms/inputs/SearchInput";
 import PriceRangeFilter from "../forms/inputs/PriceRange";
 import { content } from "@/config/content";
-import CategoriesCheckbox from "../forms/inputs/CategoriesCheckbox";
+import CategoriesCheckbox, { CategoryItem } from "../forms/inputs/CategoriesCheckbox";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
+import { useState } from "react";
+import StockCheckbox from "../forms/inputs/StockCheckbox";
 
 interface IProps {
-    className?: string;
+  className?: string;
+  cats: CategoryItem[];
 }
 
 export default function ProductsFilterCard(props: IProps) {
-    const { className } = props;
+  const { className, cats } = props;
+  const [isAvailableOnly, setIsAvailableOnly] = useState()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-    function onPriceFilter(value: number[]) {
-        console.log({value})
+  function onPriceFilter(value: number[]) {
+    console.log({ value })
+  }
+
+
+  const selectedCategoryIds =
+    searchParams.get("categoryIds")
+      ?.split(",")
+      .map(Number)
+      .filter(Number.isInteger) ?? [];
+
+  function onCategoriesFilter(selected: CategoryItem[]) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (selected.length === 0) {
+      params.delete("categoryIds");
+    } else {
+      params.set(
+        "categoryIds",
+        selected.map(c => c.id).join(",")
+      );
     }
 
-    function onCategoriesFilter(value: string[]) {
-        console.log({value})
+    // reset page when filter changes
+    params.set("page", "1");
+
+    router.push(`?${params.toString()}`);
+  }
+
+
+  function onChangeStock(selected: string[]) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (selected.length === 0) {
+      params.delete("isAvailableOnly");
     }
-
-    function onInputChange(value: string) {
-        console.log({value})
+    else {
+      params.set("isAvailableOnly", "true");
     }
+    // reset page when filter changes
+    params.set("page", "1");
+
+    router.push(`?${params.toString()}`);
+  }
+
+  function onInputChange(value: string) {
+    console.log({ value })
+  }
 
 
-    return <Accordion selectionMode="multiple" className={className} variant="bordered">
+  console.log({ cats })
+
+
+  return <Accordion selectionMode="multiple" className={className} variant="bordered">
     <AccordionItem key="0" aria-label="Search Input" title={<div className="text-sm font-semibold">{content.search}</div>}>
-        <SearchInput className="mb-4" onChange={onInputChange} />
+      <SearchInput className="mb-4" onChange={onInputChange} />
     </AccordionItem>
     <AccordionItem key="1" aria-label="Categories" title={<div className="text-sm font-semibold">{content.categories}</div>}>
-      <CategoriesCheckbox onSelect={onCategoriesFilter} />
+      <CategoriesCheckbox selectedIds={selectedCategoryIds} items={cats} onSelect={onCategoriesFilter} />
     </AccordionItem>
     <AccordionItem key="2" aria-label="Price" title={<div className="text-sm font-semibold">{content.priceRange}</div>}>
       <PriceRangeFilter onFilter={onPriceFilter} isLoading={false} />
+    </AccordionItem>
+    <AccordionItem key="3" aria-label="Stock" title={<div className="text-sm font-semibold">{content.stock}</div>}>
+      <StockCheckbox onSelect={onChangeStock} />
     </AccordionItem>
   </Accordion>
 }

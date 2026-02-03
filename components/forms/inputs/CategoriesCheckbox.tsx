@@ -1,38 +1,54 @@
 import { debounce } from "@/utils/helpers/debounce";
 import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-interface IProps {
-    onSelect: (selctedCategories: string[]) => void;
+export type CategoryItem = {
+    id: number;
+    title: string;
+    value: string;
+
 }
 
-export default function CategoriesCheckbox(props: IProps) {
-    const { onSelect } = props;
-    const [selected, setSelected] = useState(["buenos-aires", "sydney"]);
 
-    const debouncedSearch = useCallback(
-        debounce((value: string[]) => {
-            onSelect(value)
-        }, 1000),
-        []
-      );
+export default function CategoriesCheckbox({
+    items,
+    selectedIds,
+    onSelect,
+}: {
+    items: CategoryItem[];
+    selectedIds: number[];
+    onSelect: (selected: CategoryItem[]) => void;
+}) {
+    const [localSelected, setLocalSelected] = useState<string[]>([]);
 
+    // 🔥 sync URL → UI
+    useEffect(() => {
+        setLocalSelected(selectedIds.map(String));
+    }, [selectedIds]);
 
-    function handleChange(val: string[]) {
-        setSelected(val)
-        debouncedSearch(val)
+    function handleChange(values: string[]) {
+        setLocalSelected(values);
+
+        const selectedItems = items.filter(item =>
+            values.includes(String(item.id))
+        );
+
+        onSelect(selectedItems);
     }
 
-    return <CheckboxGroup
-        defaultValue={["buenos-aires", "london"]}
-        className="mb-4"
-        value={selected}
-        onValueChange={handleChange}
-    >
-        <Checkbox value="buenos-aires">Buenos Aires</Checkbox>
-        <Checkbox value="sydney">Sydney</Checkbox>
-        <Checkbox value="san-francisco">San Francisco</Checkbox>
-        <Checkbox value="london">London</Checkbox>
-        <Checkbox value="tokyo">Tokyo</Checkbox>
-    </CheckboxGroup>
+    return (
+        <CheckboxGroup
+            value={localSelected}
+            onValueChange={handleChange}
+        >
+            {items.map(item => (
+                <Checkbox
+                    key={item.id}
+                    value={String(item.id)}
+                >
+                    {item.title}
+                </Checkbox>
+            ))}
+        </CheckboxGroup>
+    );
 }
