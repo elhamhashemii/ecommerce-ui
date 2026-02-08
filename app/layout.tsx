@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
+// import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/layouts/navbar";
 import { BottomAppBar } from "@/components/layouts/BottomAppBar";
 import { Footer } from "@/components/layouts/Footer";
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable,
+          // fontSans.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
