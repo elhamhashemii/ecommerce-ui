@@ -2,16 +2,16 @@ import { Button, ButtonGroup } from "@heroui/button";
 import { TbMinus, TbPlus } from "react-icons/tb";
 
 interface IProps {
-    qty: number;
-    onAdd: () => void;
-    onRemove: () => void;
-    isCompact?: boolean;
+  qty: number;
+  onAdd: () => void;
+  onRemove: () => void;
+  isCompact?: boolean;
 }
 
-export default function QuantityButton(props: IProps) {
-    const { qty, onAdd, onRemove, isCompact = false } = props;
-    
-    return <ButtonGroup
+export default function qtyButton(props: IProps) {
+  const { qty, onAdd, onRemove, isCompact = false } = props;
+
+  return <ButtonGroup
     className="w-full font-bold"
     color="primary"
     variant="bordered"

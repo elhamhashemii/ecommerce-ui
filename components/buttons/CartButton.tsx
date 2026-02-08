@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { TbShoppingCart, TbShoppingCartOff } from "react-icons/tb";
 import { content } from "@/config/content";
 import DropdownCartItem from "../cards/DropdownCartItem";
+import { useUser } from "@/context/user";
 
 
 export default function CartButton() {

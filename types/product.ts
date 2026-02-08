@@ -2,18 +2,21 @@ import { StaticImageData } from "next/image"
 
 export type ProductType = {
     id: number;
-    img: string | StaticImageData;
+    imageUrls: string[];
     title: string;
     category: string;
     price: number;
     stock: number
     slug: string;
+    soldCount?: number;
+    attributes?: any[];
+    description?: string;
 }
 
 export type CartItemType = {
-    id: number
-    title: string
-    price: number
+    id: number;
+    createdAt?: string;
+    updatedAt?: string;
     qty: number
-    img: string | StaticImageData | any;
-  }
+    product: ProductType
+}

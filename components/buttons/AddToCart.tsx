@@ -7,6 +7,7 @@ import { Button } from "@heroui/button";
 import { useEffect, useState } from "react";
 import { TbShoppingCart } from "react-icons/tb";
 import QuantityButton from "./QuantityButton";
+import { addToUserCart, removeFromUserCart } from "@/actions/client/clientActions";
 
 interface IProps {
   product: ProductType;
@@ -14,8 +15,9 @@ interface IProps {
 
 export default function AddToCartButton(props: IProps) {
   const { product } = props;
+
   const cartItem = useCartStore((state) =>
-    state.items.find((item) => item.id === product.id)
+    state.items.find((item) => item.product.id === product.id)
   );
 
 
@@ -23,17 +25,31 @@ export default function AddToCartButton(props: IProps) {
   const addItem = useCartStore((s) => s.addItem)
   const updateQty = useCartStore((s) => s.updateQty)
 
-  const handleAddToCart = () => {
+  async function handleAddToCart() {
     setQty(1)
-    addItem({ id: product.id, title: product.title, price: product.price, qty: 1, img: product.img })
+    addItem({ id: product.id, product, qty: 1 })
+    try {
+      const response = await addToUserCart({ productId: product.id, qty: 1 })
+      console.log({ response })
+    } catch (err) {
+
+    } finally { }
   };
-  const handleAdd = () => {
+
+  async function handleAdd() {
     setQty(prev => prev + 1)
     updateQty(product.id, qty + 1)
+    try {
+      const res = await addToUserCart({ productId: product.id, qty: 1 })
+    } catch (err) { } finally { }
   };
-  const handleRemove = () => {
+
+  async function handleRemove() {
     setQty(prev => Math.max(prev - 1, 0))
     updateQty(product.id, qty - 1)
+    try {
+      const res = await removeFromUserCart({ productId: product.id })
+    } catch (err) { } finally { }
   };
 
   const isAdded = qty > 0;

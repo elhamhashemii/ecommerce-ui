@@ -20,6 +20,22 @@ export async function verifyOTP(data: any) {
     return await fetcher("/auth/verify-otp", { method: "POST", body: JSON.stringify(data) });
 }
 
+export async function addToUserCart(data: any) {
+    return await fetcher("/cart/add", { method: "POST", body: JSON.stringify(data) });
+}
+
+export async function removeFromUserCart(data: { productId: number, qty?: number }) {
+    return await fetcher(`/cart/remove/${data.productId}`, { method: "DELETE", body: JSON.stringify(data) });
+}
+
+export async function getUserCart() {
+    return await fetcher("/cart", { method: "GET" });
+}
+
+export async function updateUserCart(data: { productId: number, qty: number }[]) {
+    return await fetcher("/cart/update", { method: "POST", body: JSON.stringify(data) });
+}
+
 // upload avatar
 export async function uploadAvatar(file: File) {
     const formData = new FormData();

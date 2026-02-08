@@ -20,6 +20,7 @@ import { normalizePersianNumbers } from "@/utils/formatter/main";
 import { checkPhone, requestOtp } from "@/actions/server/serverActions";
 import { verifyOTP } from "@/actions/client/clientActions";
 import { useSearchParams, useRouter } from "next/navigation";
+import { syncCartAfterLogin } from "@/utils/helpers/main";
 
 interface IProps {
     noHead?: boolean;
@@ -97,22 +98,6 @@ export const LoginForm = (props: IProps) => {
     }
 
 
-
-    // async function handleLogin() {
-    //     try {
-    //         setIsFinalLoading(true)
-    //         const response: any = await verifyOTP({ phoneNumber, code: otp })
-    //         if (response.token) {
-    //             !isModal ? window.location.href = routes.PROFILE : onFinish()
-    //             setUser(response.user)
-    //         }
-    //     } catch (err: any) {
-    //         toast.error(err?.response?.data?.message || err?.message || "Something went wrong!")
-    //     } finally {
-    //         setIsFinalLoading(false)
-    //     }
-    // }
-
     async function handleLogin() {
         try {
             setIsFinalLoading(true);
@@ -121,6 +106,7 @@ export const LoginForm = (props: IProps) => {
 
             if (response.token) {
                 setUser(response.user);
+                syncCartAfterLogin()
 
                 // modal login (no redirect)
                 if (isModal) {

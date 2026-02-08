@@ -15,7 +15,8 @@ interface ProductCardProps {
 
 export default function ProductCard(props: ProductCardProps) {
     const { product } = props;
-    const { id, img, title, category, price, stock, slug } = product;
+    const { id, imageUrls, title, category, price, stock, slug } = product;
+    const img = (imageUrls && imageUrls.length > 0) ? imageUrls[0] : ""
 
 
     return <Card isDisabled={stock === 0} shadow="sm" radius="sm" className="flex flex-col items-center justify-center mb-4 break-inside-avoid overflow-hidden">

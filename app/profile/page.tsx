@@ -23,6 +23,7 @@ export default function ProfilePage() {
             }
         } catch (err) {
             logout()
+            localStorage.removeItem("user")
             router.push(routes.LOGIN)
         }
     }

@@ -33,23 +33,31 @@ export const useCartStore = create<CartState>()(
         }),
       removeItem: (id) =>
         set((state) => ({ items: state.items.filter((i) => i.id !== +id) })),
-      updateQty: (id, qty) =>
+      updateQty: (id: number, qty: number) =>
         set((state) => {
-          if (qty <= 0) {
-            // remove item if new quantity is 0
-            return { items: state.items.filter((i) => i.id !== id) }
-          }
           return {
-            items: state.items.map((i) =>
-              i.id === id ? { ...i, qty } : i
-            ),
+            items: state.items
+              .map((i) => i.product.id === id ? { ...i, qty } : i)
+              .filter((i) => i.qty > 0)  // automatically remove if qty <= 0
           }
         }),
+      // updateQty: (id, qty) =>
+      //   set((state) => {
+      //     if (qty <= 0) {
+      //       // remove item if new qty is 0
+      //       return { items: state.items.filter((i) => i.product.id !== id) }
+      //     }
+      //     return {
+      //       items: state.items.map((i) =>
+      //         i.id === id ? { ...i, qty } : i
+      //       ),
+      //     }
+      //   }),
       clearCart: () => set({ items: [] }),
       setCart: (items) => set({ items }),
       getTotalPrice: () => {
         const items = get().items;
-        return items.reduce((total, item) => total + item.price * item.qty, 0);
+        return items.reduce((total, item) => total + +item.product.price * item.qty, 0);
       },
       getTotalQty: () => {
         const items = get().items;

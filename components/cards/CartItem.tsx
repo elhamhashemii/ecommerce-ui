@@ -14,17 +14,19 @@ interface IProps {
 
 export default function CartItem(props: IProps) {
     const { item, className = undefined } = props;
+    const { product, id, qty } = item;
+    const img = product.imageUrls?.length > 0 ? product.imageUrls[0] : ""
 
-    
+
     return <div className={`flex flex-row items-center justify-between md:gap-4 ${className}`}>
         <div>
-            <Image src={item.img} width={120} height={120} alt="product" className="rounded-[8px] w-full hidden md:block" />
+            <Image src={img} width={120} height={120} alt="product" className="rounded-[8px] w-full hidden md:block" />
         </div>
         <div className="w-full">
-            <Link href={`/product/${item.id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{item.title}</Link>
-            <div className="my-2 text-xs text-gray-400">{PriceFormatter(item.price)}</div>
-            <div className="my-2 text-xs text-gray-400">{content.qty}: {item.qty} عدد</div>
-            <div className="my-2 text-xs text-gray-400">{content.totalSum}: {PriceFormatter(item.price * item.qty)}</div>
+            <Link href={`/product/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{product.title}</Link>
+            <div className="my-2 text-xs text-gray-400">{PriceFormatter(product.price)}</div>
+            <div className="my-2 text-xs text-gray-400">{content.qty}: {qty} عدد</div>
+            <div className="my-2 text-xs text-gray-400">{content.totalSum}: {PriceFormatter(product.price * qty)}</div>
         </div>
         <div className="flex md:flex-col items-center justify-between md:justify-end md:gap-8">
             <DeleteCartItemButton product={item} />

@@ -1,3 +1,5 @@
+import { CartItemType } from "@/types/product";
+
 export function normalizePersianNumbers(value: string): string {
     if (!value) return value;
 
