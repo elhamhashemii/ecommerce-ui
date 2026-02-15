@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { TbShoppingCart } from "react-icons/tb";
 import QuantityButton from "./QuantityButton";
 import { addToUserCart, removeFromUserCart } from "@/actions/client/clientActions";
+import { toast } from "react-toastify";
 
 interface IProps {
   product: ProductType;
@@ -37,11 +38,15 @@ export default function AddToCartButton(props: IProps) {
   };
 
   async function handleAdd() {
-    setQty(prev => prev + 1)
-    updateQty(product.id, qty + 1)
-    try {
-      const res = await addToUserCart({ productId: product.id, qty: 1 })
-    } catch (err) { } finally { }
+    if (product.stock > qty) {
+      setQty(prev => prev + 1)
+      updateQty(product.id, qty + 1)
+      try {
+        const res = await addToUserCart({ productId: product.id, qty: 1 })
+      } catch (err) { } finally { }
+    } else {
+      toast.warn(<div className="text-sm">{content.outOfStockWarnMsg}</div>)
+    }
   };
 
   async function handleRemove() {

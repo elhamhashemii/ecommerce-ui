@@ -63,7 +63,11 @@ export default function CartItems() {
 
     return cartItems.length > 0 ? <Card shadow="sm" className="p-2 w-full md:basis-2/3">
         {cartItems.map((item, index: number) => {
-            return <CartItem key={item.id} item={item} className={`${index + 1 < cartItems.length ? "border-b border-b-gray-200 pb-4" : "border-none"} m-2`} />
+            return <CartItem
+                key={item.id}
+                item={item}
+                className={`${index + 1 < cartItems.length ? "border-b border-b-gray-200 pb-4" : "border-none"} m-2`}
+            />
         })}
     </Card> : <div>Empty Cart</div>
 }

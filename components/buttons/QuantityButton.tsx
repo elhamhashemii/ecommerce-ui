@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export default function qtyButton(props: IProps) {
-  const { qty, onAdd, onRemove, isCompact = false } = props;
+  const { qty, onAdd, onRemove, isCompact = false} = props;
 
   return <ButtonGroup
     className="w-full font-bold"

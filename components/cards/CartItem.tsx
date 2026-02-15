@@ -2,8 +2,6 @@ import { content } from "@/config/content";
 import { CartItemType } from "@/types/product";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import Image from "next/image";
-import { TbTrash } from "react-icons/tb";
-import { Button } from "@heroui/button";
 import Link from "next/link";
 import DeleteCartItemButton from "../buttons/DeleteCartItemButton";
 

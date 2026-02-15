@@ -1,5 +1,6 @@
 // auth-required APIs, browser only
 
+import { ShippingMethod } from "@/components/buttons/ShippingMethodRadioButtons";
 import { fetcher } from "@/lib/fetcher";
 
 // get current user
@@ -34,6 +35,74 @@ export async function getUserCart() {
 
 export async function updateUserCart(data: { productId: number, qty: number }[]) {
     return await fetcher("/cart/update", { method: "POST", body: JSON.stringify(data) });
+}
+
+export async function deleteCartItemRecord(productId: number) {
+    return await fetcher(`/cart/remove-record/${productId}`, { method: "DELETE" });
+}
+
+export async function checkout(router: any) {
+    return await fetcher("/orders/create", {
+        method: "POST",
+        authRedirect: true,
+        router
+    });
+}
+
+export async function getUserOrders(router: any) {
+    return await fetcher("/orders/my", {
+        method: "GET",
+        authRedirect: true,
+        router
+    });
+}
+
+export async function getOrderById(orderId: number, router: any) {
+    return await fetcher(`/orders/${orderId}`, {
+        method: "GET",
+        authRedirect: true,
+        router
+    });
+}
+
+export async function attachOrderShippingInfo(orderId: number, addressId: number, shippingMethod: ShippingMethod, router: any) {
+    return await fetcher(`/orders/attach-shipping`, {
+        method: "POST",
+        body: JSON.stringify({ orderId, addressId, shippingMethod }),
+        authRedirect: true,
+        router
+    });
+}
+
+export async function getUserAddresses(router: any) {
+    return await fetcher("/address", {
+        method: "GET",
+        authRedirect: true,
+        router
+    });
+}
+export async function createAddress(data: any, router: any) {
+    return await fetcher("/address", {
+        method: "POST",
+        body: JSON.stringify(data),
+        authRedirect: true,
+        router
+    });
+}
+export async function updateAddressById(data: any, addressId: number, router: any) {
+    return await fetcher(`/address/${addressId}`, {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        authRedirect: true,
+        router
+    });
+}
+export async function deleteAddressById(addressId: number, router: any) {
+    return await fetcher(`/address/${addressId}`, {
+        method: "DELETE",
+        authRedirect: true,
+        router
+    });
 }
 
 // upload avatar

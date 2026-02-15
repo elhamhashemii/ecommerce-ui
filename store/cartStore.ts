@@ -66,7 +66,7 @@ export const useCartStore = create<CartState>()(
       getItems: () => get().items,
       deleteItem: (id) =>
         set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
+          items: state.items.filter((i) => i?.product?.id !== id),
         })),
     }),
     { name: 'guest-cart' } // Saves in localStorage

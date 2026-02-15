@@ -5,6 +5,8 @@ export const routes = {
     LOGIN: "/auth/login",
     SIGNUP: "/auth/register",
     TERMS: "/terms",
-    PROFILE: "/profile"
+    PROFILE: "/profile",
+    CHECKOUT: "/checkout",
+    ORDERS: "/orders"
   };
   
