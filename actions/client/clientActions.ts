@@ -57,7 +57,7 @@ export async function getUserOrders(router: any) {
     });
 }
 
-export async function getOrderById(orderId: number, router: any) {
+export async function getOrderById(orderId: string, router: any) {
     return await fetcher(`/orders/${orderId}`, {
         method: "GET",
         authRedirect: true,

@@ -19,8 +19,10 @@ import { Button } from "@heroui/button";
 import CartButton from "../buttons/CartButton";
 import SearchInput from "../forms/inputs/SearchInput";
 import { useRouter } from "next/navigation";
-import { TbUser } from "react-icons/tb";
+import { TbPresentationFilled, TbUser } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
+import UserNavBtn from "../buttons/UserNavBtn";
 
 
 export const Navbar = () => {
@@ -74,14 +76,7 @@ export const Navbar = () => {
         <NavbarItem className="hidden lg:flex basis-4/6"><SearchInput /></NavbarItem>
         <NavbarItem className="hidden lg:block">
           {storedUser ?
-            <Button
-              onPress={routeToProfile}
-              variant="light"
-              size="sm"
-              className="text-xs font-semibold"
-              isIconOnly
-              startContent={<TbUser size={24} />}
-            />
+            <UserNavBtn />
             :
             <Button
               onPress={routeToLogin}

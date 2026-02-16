@@ -37,10 +37,12 @@ export default function CheckoutPage() {
     async function getCurrentOrder() {
         if (orderId) {
             try {
-                const res = await getOrderById(+orderId, router) as any;
+                const res = await getOrderById(orderId, router) as any;
                 const label = OrderStatusFa[res?.status.toUpperCase() as keyof typeof OrderStatusFa];
                 const color = OrderStatusColors[res?.status.toUpperCase() as keyof typeof OrderStatusColors];
                 const result = { ...res, status: { label, color } }
+                const shipping = res?.shipping;
+                shipping && setSelectedShippingMethod(shipping?.shippingMethod)
                 setCurrentOrder(result)
             } catch (err) { } finally { }
         } else {
@@ -58,7 +60,6 @@ export default function CheckoutPage() {
     }
 
     async function handleCreate(data: any) {
-        console.log({ data })
         try {
             const res = await createAddress(data, router)
             console.log({ res })
@@ -97,50 +98,62 @@ export default function CheckoutPage() {
     }, [])
 
     return <>
-        <div className="px-2 w-full flex justify-between items-center">
-            <div className="font-semibold mb-4 cursor-pointer">{content.checkout}</div>
+        <div className="px-2 md:pl-0 w-full flex justify-between items-center mt-0 md:mt-4">
+            <div className="font-semibold cursor-pointer">{content.checkout}</div>
             <Chip variant="dot" size="sm" radius="sm" color={currentOrder?.status?.color}>{currentOrder?.status?.label}</Chip>
         </div>
-        <Accordion
-            variant="splitted"
-            selectedKeys={activeKey}
-            // @ts-ignore
-            onSelectionChange={setActiveKey}
-        >
-            <AccordionItem indicator={<FaCircleCheck color="green" />} disableIndicatorAnimation key="0" title="اقلام سفارش">
-                <OrderItems data={currentOrder} />
-            </AccordionItem>
-
-            <AccordionItem key="1" title={content.selectShippingMethod}
-                disableIndicatorAnimation={selectedShippingMethod}
-                indicator={selectedShippingMethod && <FaCircleCheck color="green" />}
+        <div className="w-full flex flex-col md:flex-row gap-2 items-start justify-start mt-4">
+            <Accordion
+                className="w-full md:basis-3/4 text-sm"
+                variant="splitted"
+                selectedKeys={activeKey}
+                // @ts-ignore
+                onSelectionChange={setActiveKey}
             >
-                <ShippingMethodRadioBtns selected={selectedShippingMethod} onSelect={handleSelectShippingMethod} />
-            </AccordionItem>
+                <AccordionItem indicator={<FaCircleCheck color="green" />} disableIndicatorAnimation key="0" title="اقلام سفارش">
+                    <OrderItems data={currentOrder} />
+                </AccordionItem>
+
+                <AccordionItem key="1" title={content.selectShippingMethod}
+                    disableIndicatorAnimation={selectedShippingMethod}
+                    indicator={selectedShippingMethod && <FaCircleCheck color="green" />}
+                >
+                    <ShippingMethodRadioBtns selected={selectedShippingMethod} onSelect={handleSelectShippingMethod} />
+                </AccordionItem>
 
 
-            <AccordionItem key="2" title={content.chooseAddress}
-                disableIndicatorAnimation={finalizedAddress}
-                indicator={finalizedAddress && <FaCircleCheck color="green" />}
-            >
-                <MyAddresses data={myAddresses} onFinalize={handleFinalizeAddress} />
-                {formIsVisible ?
-                    <AddressForm onSubmit={handleCreate} /> :
-                    <Button onPress={showForm} className="w-full mb-2" variant="bordered">{content.addNewAddress}</Button>
-                }
-            </AccordionItem>
+                <AccordionItem key="2" title={content.chooseAddress}
+                    disableIndicatorAnimation={finalizedAddress}
+                    indicator={finalizedAddress && <FaCircleCheck color="green" />}
+                >
+                    <MyAddresses data={myAddresses} onFinalize={handleFinalizeAddress} />
+                    {formIsVisible ?
+                        <AddressForm onSubmit={handleCreate} /> :
+                        <Button onPress={showForm} className="w-full mb-2" variant="bordered">{content.addNewAddress}</Button>
+                    }
+                </AccordionItem>
 
-        </Accordion>
-        {selectedShippingMethod && <div className="my-4 mx-2">
-            <OrderDetails
-                details={
-                    {
-                        orderItems: currentOrder,
-                        shippingMethod: selectedShippingMethod,
-                        address: finalizedAddress,
-                        totalPayable: totalPayable
-                    }}
-            />
-        </div>}
+            </Accordion>
+            {selectedShippingMethod && <div className="my-4 mx-2 md:m-0 w-[95%] md:basis-1/4">
+                <OrderDetails
+                    className="text-sm"
+                    details={
+                        {
+                            orderItems: currentOrder,
+                            shippingMethod: selectedShippingMethod,
+                            address: finalizedAddress,
+                            totalPayable: totalPayable
+                        }}
+                />
+                <Button
+                    isDisabled={!totalPayable}
+                    className="w-full my-4"
+                    color="success"
+                    // onPress={redirectToPaymentGateway}
+                >
+                    {content.pay}
+                </Button>
+            </div>}
+        </div >
     </>
 }

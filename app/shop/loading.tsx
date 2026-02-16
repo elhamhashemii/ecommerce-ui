@@ -2,7 +2,7 @@
 export default function ShopLoading() {
     return (
         <div className="animate-pulse">
-            Loading Products ...
+            دریافت محصولات ...
             <div className="h-40 bg-gray-200 rounded mb-6" />
 
             <div className="flex gap-4">

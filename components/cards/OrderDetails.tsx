@@ -3,6 +3,7 @@ import { AddressType } from "../lists/MyAddresses";
 import { ShippingMethod, ShippingMethodFa } from "../buttons/ShippingMethodRadioButtons";
 import { content } from "@/config/content";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
+import { Card } from "@heroui/card";
 
 interface IProps {
     details: {
@@ -10,12 +11,12 @@ interface IProps {
         address?: AddressType;
         shippingMethod?: ShippingMethod;
         totalPayable?: number;
-
-    }
+    },
+    className?: string;
 }
 
-export default function OrderDetails({ details: { orderItems, address, shippingMethod, totalPayable } }: IProps) {
-    return <div className="border border-dashed border-gray-300 p-2 rounded-md !bg-white">
+export default function OrderDetails({ details: { orderItems, address, shippingMethod, totalPayable }, className }: IProps) {
+    return <Card shadow="sm" className={`p-4 flex flex-col gap-2 ${className}`}>
         <div>
             <span className="font-bold">{content.shippingMethod}:</span>
             {shippingMethod ? ShippingMethodFa[shippingMethod] : "-"}
@@ -28,5 +29,5 @@ export default function OrderDetails({ details: { orderItems, address, shippingM
             <span className="font-bold">{content.totalPayable}: </span>
             {totalPayable ? PriceFormatter(totalPayable) : "-"}
         </div>
-    </div>
+    </Card>
 }

@@ -26,7 +26,7 @@ export default function ProductCard(props: ProductCardProps) {
         <CardFooter className="flex flex-col items-start pt-0 -mt-1 pb-1">
             <div className="text-gray-400 text-xs">{category}</div>
             <Link href={`/product/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{title}</Link>
-            <div className="text-gray-800">{PriceFormatter(price)}</div>
+            <div className="text-gray-800">{PriceFormatter(+price)}</div>
             <div className="flex items-center justify-center w-full gap-2 my-2">
                 {stock > 0 ? <AddToCartButton product={product} /> :
                     <Button className="w-full" size="sm" color="danger" variant="bordered" startContent={<TbMoodSad size={18} />}>{content.outOfStock}</Button>

@@ -1,6 +1,6 @@
 "use client"
 
-import { deleteAddressById, getMe, getUserAddresses, getUserOrders, logout, updateAddressById } from "@/actions/client/clientActions"
+import { createAddress, deleteAddressById, getMe, getUserAddresses, getUserOrders, logout, updateAddressById } from "@/actions/client/clientActions"
 import { useUser } from "@/context/user"
 import { routes } from "@/lib/routeNames"
 import { Card } from "@heroui/card"
@@ -19,6 +19,11 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/d
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/modal"
 import AddressForm from "@/components/forms/AddressForm"
 import { toast } from "react-toastify"
+import OrderItems from "@/components/cards/OrderItems"
+import Image from "next/image"
+import { Chip } from "@heroui/chip"
+import { OrderStatusColors, OrderStatusFa } from "@/types"
+import { PriceFormatter } from "@/utils/formatter/PriceFormatter"
 
 export function LoadingProfile() {
     return <Card shadow="sm" radius="sm" className="p-8">
@@ -119,6 +124,25 @@ export default function ProfilePage() {
         }
     }
 
+    async function handleCreateAddress(data: any, onClose: () => void) {
+        try {
+            const res = await createAddress(data, router)
+            if (res) {
+                getAddresses()
+                onClose()
+            }
+        } catch (err) { } finally { }
+    }
+
+    async function handleFormSubmit(data: any, onClose: () => void) {
+        if (selectedAddress) {
+            updateAddress(data, onClose)
+        }
+        else {
+            handleCreateAddress(data, onClose)
+        }
+    }
+
 
     useEffect(() => {
         getUser()
@@ -154,33 +178,46 @@ export default function ProfilePage() {
             </Tab>
             <Tab key="addresses" title={content.myAddresses}>
                 {loading ? <LoadingProfile /> :
-                    <Card shadow="sm" radius="sm" className="p-4 flex flex-col gap-2">
-                        {userAddresses && userAddresses.length && userAddresses?.length > 0 &&
-                            userAddresses.map((item: AddressType, index: number) => {
-                                return <ul className="text-sm w-full" key={item?.id}>
-                                    <li className="w-full">
-                                        <div className="w-full font-semibold flex items-center justify-between">
-                                            <div className="flex items-center gap-1">
-                                                <FaLocationDot size={16} color="#f37608" />
-                                                {item?.title}
+                    <>
+                        <Card shadow="sm" radius="sm" className="p-4 flex flex-col gap-2">
+                            {userAddresses && userAddresses.length && userAddresses?.length > 0 &&
+                                userAddresses.map((item: AddressType, index: number) => {
+                                    return <ul className="text-sm w-full" key={item?.id}>
+                                        <li className="w-full">
+                                            <div className="w-full font-semibold flex items-center justify-between">
+                                                <div className="flex items-center gap-1">
+                                                    <FaLocationDot size={16} color="#f37608" />
+                                                    {item?.title}
+                                                </div>
+                                                <Dropdown>
+                                                    <DropdownTrigger>
+                                                        <Button variant="light" isIconOnly radius="full" startContent={<TbDotsVertical size={16} />} />
+                                                    </DropdownTrigger>
+                                                    <DropdownMenu aria-label="Static Actions" onAction={(key) => onAction(key, item)}>
+                                                        <DropdownItem startContent={<TbEdit />} key="edit">{content.edit}</DropdownItem>
+                                                        <DropdownItem color="danger" startContent={<TbTrash />} key="delete">{content.delete}</DropdownItem>
+                                                    </DropdownMenu>
+                                                </Dropdown>
                                             </div>
-                                            <Dropdown>
-                                                <DropdownTrigger>
-                                                    <Button variant="light" isIconOnly radius="full" startContent={<TbDotsVertical size={16} />} />
-                                                </DropdownTrigger>
-                                                <DropdownMenu aria-label="Static Actions" onAction={(key) => onAction(key, item)}>
-                                                    <DropdownItem startContent={<TbEdit />} key="edit">{content.edit}</DropdownItem>
-                                                    <DropdownItem color="danger" startContent={<TbTrash />} key="delete">{content.delete}</DropdownItem>
-                                                </DropdownMenu>
-                                            </Dropdown>
-                                        </div>
-                                        <div className="text-gray-400 pr-2 text-xs mt-2">{item?.postalCode}</div>
-                                        <div className="text-gray-400 pr-2 text-xs">{item?.address}</div>
-                                        {index + 1 !== userAddresses.length && <Divider className="mt-4" />}
-                                    </li>
-                                </ul>
-                            })}
-                    </Card>
+                                            <div className="text-gray-400 pr-2 text-xs mt-2">{item?.postalCode}</div>
+                                            <div className="text-gray-400 pr-2 text-xs">{item?.address}</div>
+                                            {index + 1 !== userAddresses.length && <Divider className="mt-4" />}
+                                        </li>
+                                    </ul>
+                                })}
+
+                        </Card>
+                        <Button
+                            className="mt-4 w-full"
+                            color="primary"
+                            onPress={() => {
+                                onOpen()
+                                setSelectedAddress(undefined)
+                            }}
+                        >
+                            {content.addNewAddress}
+                        </Button>
+                    </>
                 }
 
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -188,7 +225,7 @@ export default function ProfilePage() {
                         {(onClose) => (<>
                             <ModalHeader>{content.edit}</ModalHeader>
                             <ModalBody className="text-sm">
-                                <AddressForm init={selectedAddress} isLoading={loading} onSubmit={(data) => updateAddress(data, onClose)} />
+                                <AddressForm init={selectedAddress} isLoading={loading} onSubmit={(data) => handleFormSubmit(data, onClose)} />
                             </ModalBody>
                         </>
                         )}
@@ -197,18 +234,26 @@ export default function ProfilePage() {
             </Tab>
             <Tab key="orders" title={content.myOrders}>
                 <Card shadow="sm" radius="sm" className="p-4 flex flex-col gap-4">
-                    {userOrders && userOrders.length && userOrders?.length > 0 &&
+                    {(userOrders && userOrders.length && userOrders?.length > 0) ?
                         userOrders.map((item: any, index: number) => {
                             return <ul className="text-sm" key={item?.id}>
                                 <li>
-                                    {item?.id}
-                                    {/* <div className="font-semibold">• {item?.title}</div>
-                                    <div className="text-gray-400 pr-2 text-xs mt-2">{item?.postalCode}</div>
-                                    <div className="text-gray-400 pr-2 text-xs">{item?.address}</div> */}
+                                    <div className="w-full flex items-center justify-between">
+                                        <Chip variant="dot" size="sm" radius="sm"
+                                            color={OrderStatusColors[item?.status.toUpperCase() as keyof typeof OrderStatusColors]}
+                                        >
+                                            {OrderStatusFa[item?.status.toUpperCase() as keyof typeof OrderStatusFa]}
+                                        </Chip>
+                                        <Button onPress={() => router.push(`${routes.CHECKOUT}?orderId=${item?.id}`)} variant="light" size="sm" color="primary">{content.orderInfo}</Button>
+                                    </div>
+                                    <div className="my-2">شناسه سفارش:  <br /> <span className="text-gray-400 text-xs">{item?.id}</span></div>
+                                    <div>مبلغ:
+                                        <br /> <span className="text-gray-400 text-xs">{PriceFormatter(+item.totalPayable || +item?.totalPrice)} </span>
+                                    </div>
                                     {index + 1 !== userOrders.length && <Divider className="mt-4" />}
                                 </li>
                             </ul>
-                        })}
+                        }) : <div className="text-sm">شما هنوز سفارشی ثبت نکرده‌اید.</div>}
                 </Card>
             </Tab>
         </Tabs>
