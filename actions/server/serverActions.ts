@@ -33,6 +33,10 @@ export async function fetchProducts(options?: {
   });
 }
 
+export async function fetchProductById(id: any) {
+  return fetcher(`/products/${id}`, { method: "GET" })
+}
+
 export async function fetchCategories() {
   return fetcher("/categories", { method: "GET" })
 }

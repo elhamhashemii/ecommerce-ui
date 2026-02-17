@@ -4,6 +4,7 @@ import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteCartItemButton from "../buttons/DeleteCartItemButton";
+import ProductImage from "../product/ProductImage";
 
 interface IProps {
     item: CartItemType;
@@ -13,12 +14,12 @@ interface IProps {
 export default function CartItem(props: IProps) {
     const { item, className = undefined } = props;
     const { product, id, qty } = item;
-    const img = product.imageUrls?.length > 0 ? product.imageUrls[0] : ""
+    const img = product.imageUrls?.length > 0 ? `https://${product.imageUrls[0]}` : ""
 
 
     return <div className={`flex flex-row items-center justify-between md:gap-4 ${className}`}>
         <div>
-            <Image src={img} width={120} height={120} alt="product" className="rounded-[8px] w-full hidden md:block" />
+            <ProductImage src={img} className="w-24 h-24" />
         </div>
         <div className="w-full">
             <Link href={`/product/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm py-1 font-semibold hover:underline hover:text-blue-800">{product.title}</Link>

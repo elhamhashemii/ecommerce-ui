@@ -22,9 +22,11 @@ export default async function ShopPage({
 
     const isAvailableOnly = Boolean(searchParams?.isAvailableOnly)
 
+    const limit = 12;
+
     const products: any = await fetchProducts({
         page,
-        limit: 5,
+        limit: limit,
         sort,
         categoryIds,
         isAvailableOnly
