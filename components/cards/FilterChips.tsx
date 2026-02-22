@@ -43,7 +43,7 @@ export default function FilterChips({ className, cats }: IProps) {
   if (search) {
     chips.push({
       key: "search",
-      label: `Search: "${search}"`,
+      label: search,
     });
   }
 

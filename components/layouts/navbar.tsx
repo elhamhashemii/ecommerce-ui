@@ -17,12 +17,13 @@ import { siteConfig } from "@/config/site";
 import { content } from "@/config/content";
 import { Button } from "@heroui/button";
 import CartButton from "../buttons/CartButton";
-import SearchInput from "../forms/inputs/SearchInput";
+import SearchInput from "../forms/inputs/FilterSearchInput";
 import { useRouter } from "next/navigation";
 import { TbPresentationFilled, TbUser } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
 import UserNavBtn from "../buttons/UserNavBtn";
+import NavbarSearchInput from "../forms/inputs/NavbarSearchInput";
 
 
 export const Navbar = () => {
@@ -73,7 +74,9 @@ export const Navbar = () => {
         className="hidden sm:flex justify-end basis-1/4 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden lg:flex basis-4/6"><SearchInput /></NavbarItem>
+        <NavbarItem className="hidden lg:flex basis-4/6">
+          <NavbarSearchInput />
+        </NavbarItem>
         <NavbarItem className="hidden lg:block">
           {storedUser ?
             <UserNavBtn />
@@ -102,7 +105,6 @@ export const Navbar = () => {
 
       {/* Mobile Drawer Menu */}
       <NavbarMenu className="bg-white">
-        <SearchInput />
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

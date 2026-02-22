@@ -17,7 +17,7 @@ export async function requestOtp(phoneNumber: string) {
 }
 
 export async function fetchProducts(options?: {
-  page?: number, limit?: number, sort?: string, categoryIds?: number[], isAvailableOnly?: boolean;
+  page?: number, limit?: number, sort?: string, categoryIds?: number[], isAvailableOnly?: boolean; search?: string;
 }) {
   // return await fetcher("/products", { method: "GET" });
   const params = new URLSearchParams();

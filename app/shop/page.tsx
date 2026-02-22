@@ -12,10 +12,11 @@ import { CategoryItem } from "@/components/forms/inputs/CategoriesCheckbox";
 export default async function ShopPage({
     searchParams,
 }: {
-    searchParams?: { page?: string; sort?: string; categoryIds?: string, isAvailableOnly?: string; };
+    searchParams?: { page?: string; sort?: string; categoryIds?: string, isAvailableOnly?: string; search?: string };
 }) {
     const page = Number(searchParams?.page ?? 1);
     const sort = searchParams?.sort || "newest";
+    const search = searchParams?.search;
     const categoryIds = searchParams?.categoryIds
         ? searchParams.categoryIds.split(",").map(Number)
         : undefined;
@@ -29,7 +30,8 @@ export default async function ShopPage({
         limit: limit,
         sort,
         categoryIds,
-        isAvailableOnly
+        isAvailableOnly,
+        search
     });
 
     const cats = await fetchCategories() as CategoryItem[]

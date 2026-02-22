@@ -1,7 +1,6 @@
 "use client"
 
 import { Accordion, AccordionItem } from "@heroui/accordion";
-import SearchInput from "../forms/inputs/SearchInput";
 import PriceRangeFilter from "../forms/inputs/PriceRange";
 import { content } from "@/config/content";
 import CategoriesCheckbox, { CategoryItem } from "../forms/inputs/CategoriesCheckbox";
@@ -9,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Checkbox, CheckboxGroup } from "@heroui/checkbox";
 import { useState } from "react";
 import StockCheckbox from "../forms/inputs/StockCheckbox";
+import FilterSearchInput from "../forms/inputs/FilterSearchInput";
 
 interface IProps {
   className?: string;
@@ -74,7 +74,8 @@ export default function ProductsFilterCard(props: IProps) {
 
   return <Accordion selectionMode="multiple" className={className} variant="bordered">
     <AccordionItem key="0" aria-label="Search Input" title={<div className="text-sm font-semibold">{content.search}</div>}>
-      <SearchInput className="mb-4" onChange={onInputChange} />
+      {/* <SearchInput className="mb-4" onChange={onInputChange} /> */}
+      <FilterSearchInput className="mb-4" />
     </AccordionItem>
     <AccordionItem key="1" aria-label="Categories" title={<div className="text-sm font-semibold">{content.categories}</div>}>
       <CategoriesCheckbox selectedIds={selectedCategoryIds} items={cats} onSelect={onCategoriesFilter} />
