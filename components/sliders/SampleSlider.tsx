@@ -9,6 +9,7 @@ import img3 from "@/public/images/Gemini_Generated_Image_sav004sav004sav0.png"
 import { Navigation, Pagination } from 'swiper/modules';
 import { Button } from '@heroui/button';
 import { routes } from '@/lib/routeNames';
+import Link from 'next/link';
 
 export default function SampleSlider() {
   return (
@@ -38,10 +39,10 @@ export default function SampleSlider() {
               را به ایده‌های بزرگ تبدیل می‌کنند.
             </p>
             <div className="flex gap-2 justify-center md:justify-start">
-              <Button size="sm" color="primary" href={routes.SHOP}>
+              <Button size="sm" color="primary" as={Link} href={routes.SHOP}>
                 همین حالا خرید کن
               </Button>
-              <Button size="sm" variant="bordered" color="primary" href={routes.SHOP}>
+              <Button size="sm" variant="bordered" as={Link} color="primary" href={routes.SHOP}>
                 دیدن جدیدترین‌ها
               </Button>
             </div>

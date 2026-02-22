@@ -6,6 +6,9 @@ import { fetchCategories, fetchProducts } from "@/actions/server/serverActions";
 import SocialMediaSection from "@/components/lists/SocialMediaSection";
 import CategoriesList from "@/components/lists/CategoriesList";
 import BestSellerSlider from "@/components/sliders/BestSellerSlider";
+import { Button } from "@heroui/button";
+import { routes } from "@/lib/routeNames";
+import Link from "next/link";
 
 export default async function Home() {
   const products: any = await fetchProducts();
@@ -32,6 +35,7 @@ export default async function Home() {
           <p className="text-gray-600 mb-8">
             از جدیدترین محصولات و پیشنهادهای ویژه زودتر از همه باخبر شوید.
           </p>
+          <Button as={Link} color="secondary" href={routes.CONTACT}>با ما درتماس باشید</Button>
         </div>
       </section>
       <SocialMediaSection />

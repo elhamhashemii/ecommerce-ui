@@ -2,7 +2,6 @@ import FAQsAccordion from "@/components/lists/FaqsAccordion";
 import { content } from "@/config/content";
 import { HiLocationMarker } from "react-icons/hi";
 import { BiSolidPhoneCall } from "react-icons/bi";
-import { Card } from "@heroui/card";
 import { FaShop } from "react-icons/fa6";
 import SocialMediaSection from "@/components/lists/SocialMediaSection";
 import ContactUsSection from "@/components/forms/ContactUsForm";
@@ -47,9 +46,6 @@ export default function ShopPage() {
                 <ContactUsSection />
             </div>
         </div>
-        <div className="w-full mt-4 md:mt-12">
-            <SocialMediaSection />
-        </div>
         <div className="w-full bg-blue-100 mt-4 md:mt-12">
             <iframe
                 className="w-full rounded-md"
@@ -61,6 +57,9 @@ export default function ShopPage() {
                 loading="lazy"
                 style={{ borderRadius: "12px" }}
             ></iframe>
+        </div>
+        <div className="w-full mt-4 md:mt-12">
+            <SocialMediaSection />
         </div>
     </div>
 }

@@ -8,6 +8,17 @@ import { toast } from "react-toastify";
 
 export default function ContactUsSection() {
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    function clearForm() {
+        setName("");
+        setPhone("");
+        setEmail("");
+        setMessage("");
+    }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,6 +28,8 @@ export default function ContactUsSection() {
         setTimeout(() => {
             setLoading(false);
             toast.success(<div className="text-sm">پیام شما با موفقیت ارسال شد 🤍</div>);
+            clearForm()
+
         }, 1500);
     };
 
@@ -32,6 +45,8 @@ export default function ContactUsSection() {
                         label="نام و نام خانوادگی"
                         placeholder="نام خود را وارد کنید"
                         variant="bordered"
+                        value={name}
+                        onValueChange={setName}
                     />
 
                     <Input
@@ -39,6 +54,8 @@ export default function ContactUsSection() {
                         label="شماره تماس"
                         placeholder="09xxxxxxxxx"
                         variant="bordered"
+                        value={phone}
+                        onValueChange={setPhone}
                     />
 
                     <Input
@@ -46,6 +63,8 @@ export default function ContactUsSection() {
                         label="ایمیل (اختیاری)"
                         placeholder="example@email.com"
                         variant="bordered"
+                        value={email}
+                        onValueChange={setEmail}
                     />
 
                     <Textarea
@@ -54,6 +73,8 @@ export default function ContactUsSection() {
                         placeholder="پیام خود را اینجا بنویسید..."
                         variant="bordered"
                         minRows={4}
+                        value={message}
+                        onValueChange={setMessage}
                     />
 
                     <Button

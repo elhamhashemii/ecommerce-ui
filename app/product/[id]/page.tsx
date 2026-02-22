@@ -1,6 +1,7 @@
-import { fetchProductById } from "@/actions/server/serverActions";
+import { fetchProductById, fetchRelatedProductById } from "@/actions/server/serverActions";
 import AddToCartButton from "@/components/buttons/AddToCart";
 import ProductSingleClient from "@/components/product/productSingleClient";
+import ProductSlider from "@/components/sliders/ProductSlider";
 import { content } from "@/config/content";
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import { Button } from "@heroui/button";
@@ -13,10 +14,11 @@ export default async function ProductSinglePage({
 }) {
 
     const product = await fetchProductById(params.id) as any;
+    const related = await fetchRelatedProductById(params.id) as any;
 
     if (!product) return notFound();
 
-    return (
+    return <>
         <div className="py-10 flex flex-col md:flex-row gap-10">
 
             {/* left — gallery + cart */}
@@ -44,13 +46,19 @@ export default async function ProductSinglePage({
                             color="danger"
                             variant="bordered"
                             isDisabled
-                            // startContent={<TbMoodSad size={18} />}
+                        // startContent={<TbMoodSad size={18} />}
                         >
                             {content.outOfStock}
                         </Button>
-                    )}                </div>
+                    )}
+                </div>
             </div>
 
         </div>
-    );
+
+
+        <div>
+            <ProductSlider products={related} title="محصولات مرتبط" subtitle="" />
+        </div>
+    </>
 }

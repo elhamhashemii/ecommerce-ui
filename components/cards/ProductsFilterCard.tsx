@@ -80,9 +80,9 @@ export default function ProductsFilterCard(props: IProps) {
     <AccordionItem key="1" aria-label="Categories" title={<div className="text-sm font-semibold">{content.categories}</div>}>
       <CategoriesCheckbox selectedIds={selectedCategoryIds} items={cats} onSelect={onCategoriesFilter} />
     </AccordionItem>
-    <AccordionItem key="2" aria-label="Price" title={<div className="text-sm font-semibold">{content.priceRange}</div>}>
+    {/* <AccordionItem key="2" aria-label="Price" title={<div className="text-sm font-semibold">{content.priceRange}</div>}>
       <PriceRangeFilter onFilter={onPriceFilter} isLoading={false} />
-    </AccordionItem>
+    </AccordionItem> */}
     <AccordionItem key="3" aria-label="Stock" title={<div className="text-sm font-semibold">{content.stock}</div>}>
       {/* <StockCheckbox checked onSelect={onChangeStock} /> */}
       <StockCheckbox
