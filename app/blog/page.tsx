@@ -3,7 +3,17 @@ import SampleSlider from "@/components/sliders/SampleSlider";
 
 export default function ShopPage() {
     return <div>
-        <SampleSlider />
+        {/* <SampleSlider /> */}
+        <div
+            style={{
+                backgroundImage: 'url(https://reverent-villani-cefcuyj0.storage.c2.liara.space/adda.webp)',
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+            }}
+            className="bg-bottom relative w-full my-8 bg-gray-100 p-4 rounded-xl text-white min-h-82 flex items-end md:items-center justify-end"
+        >
+        </div>
+        <div className="text-xl font-bold">جدیدترین مقالات</div>
         <div className="my-8">
             <BlogSlider />
         </div>

@@ -2,7 +2,15 @@ import { content } from "@/config/content";
 
 export default function AboutPage() {
     return <div>
-        <div className="w-full my-8 bg-danger p-4 rounded-xl text-white min-h-64">Hero Banner for About Us Page</div>
+        <div
+            style={{
+                backgroundImage: 'url(https://reverent-villani-cefcuyj0.storage.c2.liara.space/blog-banner.jpg)',
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+            }}
+            className="bg-center relative w-full my-8 bg-gray-100 p-4 rounded-xl text-white min-h-82 flex items-end md:items-center justify-end"
+        >
+        </div>
         <div className="font-bold mb-4 text-lg">{content.about}</div>
         <div className="flex flex-col md:flex-row w-full items-start justify-between px-0 md:px-4 gap-8">
             <div className="text-sm w-full md:basis-1/2 flex flex-col gap-2 md:gap-4">

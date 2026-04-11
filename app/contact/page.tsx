@@ -9,7 +9,22 @@ import ContactUsSection from "@/components/forms/ContactUsForm";
 export default function ShopPage() {
 
     return <div>
-        <div className="w-full my-8 bg-danger p-4 rounded-md text-white min-h-64">Hero Banner for Contact Us Page</div>
+        <div
+            style={{
+                backgroundImage: 'url(https://reverent-villani-cefcuyj0.storage.c2.liara.space/contact-us-hand-man-holding-mobile-smartphone-with-mail-phone-email-chat-icon-cutomer-support-concept-blue-wide-banner_256259-3866.avif)',
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+            }}
+            className="relative bg-right md:bg-left-top w-full my-8 bg-gray-100 p-4 rounded-xl text-white min-h-82 flex items-end md:items-center justify-end"
+        >
+            <div className="z-1 absolute block top-0 left-0 bottom-0 right-0 bg-[#11111165] rounded-xl"></div>
+            <div className="hidden md:block md:basis-1/2 text-start"></div>
+            <div
+                className="pb-4 md:pb-0 z-2 order-first md:order-last w-full md:basis-1/2 text-center md:text-start text-2xl font-bold md:text-4xl"
+            >
+                با ما در تماس باشید.
+            </div>
+        </div>
         <div className="w-full flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between gap-4">
             <div className="w-full md:basis-1/2">
                 <div>

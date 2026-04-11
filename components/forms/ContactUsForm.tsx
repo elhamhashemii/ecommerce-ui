@@ -5,6 +5,7 @@ import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { sendContactFormInfo } from "@/actions/server/serverActions";
 
 export default function ContactUsSection() {
     const [loading, setLoading] = useState(false);
@@ -20,17 +21,25 @@ export default function ContactUsSection() {
         setMessage("");
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
-
-        // TODO: connect to your API route
-        setTimeout(() => {
+        try {
+            const res = await sendContactFormInfo({ name, phone, email, message })
+        } catch (err) { } finally {
             setLoading(false);
             toast.success(<div className="text-sm">پیام شما با موفقیت ارسال شد 🤍</div>);
             clearForm()
+        }
 
-        }, 1500);
+
+        // // TODO: connect to your API route
+        // setTimeout(() => {
+        //     setLoading(false);
+        //     toast.success(<div className="text-sm">پیام شما با موفقیت ارسال شد 🤍</div>);
+        //     clearForm()
+
+        // }, 1500);
     };
 
     return (

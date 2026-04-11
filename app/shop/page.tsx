@@ -1,13 +1,11 @@
 import ProductsGroup from "@/components/lists/ProductsGroup";
-import SampleSlider from "@/components/sliders/SampleSlider";
 import ProductsFilterCard from "@/components/cards/ProductsFilterCard";
 import SortBy from "@/components/buttons/SortBy";
 import FilterChips from "@/components/cards/FilterChips";
-import { Pagination } from "@heroui/pagination";
-import { productsData } from "@/config/const";
 import { fetchCategories, fetchProducts } from "@/actions/server/serverActions";
 import ShopPagination from "@/components/pagination/ShopPagination";
 import { CategoryItem } from "@/components/forms/inputs/CategoriesCheckbox";
+import ShopSlider from "@/components/sliders/ShopSlider";
 
 export default async function ShopPage({
     searchParams,
@@ -40,7 +38,7 @@ export default async function ShopPage({
 
     return (
         <div>
-            <SampleSlider />
+            <ShopSlider />
             <div className="flex flex-col md:flex-row items-start justify-start w-full mt-4 md:mt-12 gap-4">
                 <ProductsFilterCard cats={cats} className="w-full basis-1/4" />
 

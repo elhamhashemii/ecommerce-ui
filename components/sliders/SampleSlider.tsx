@@ -50,28 +50,16 @@ export default function SampleSlider() {
 
         </div>
       </SwiperSlide>
-      {/* <SwiperSlide>
-        <div
-          style={{
-            backgroundImage: `url(${img2.src})`,
-            backdropFilter: "blur(50px)",
-            backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"
-          }}
-          className="bg-blue-400 rounded-xl w-full h-full flex items-center justify-center text-white text-xl">
-          Slide 2
-        </div>
-      </SwiperSlide>
       <SwiperSlide>
         <div
           style={{
-            backgroundImage: `url(${img1.src})`,
-            backdropFilter: "blur(50px)",
-            backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"
+            backgroundImage: `url(https://reverent-villani-cefcuyj0.storage.c2.liara.space/_methode_sundaytimes_prod_web_bin_462c1de2-cb2c-11e9-a5c5-eeafb66e7c98.jpg)`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
-          className="bg-green-400 rounded-xl w-full h-full flex items-center justify-center text-white text-xl">
-          Slide 3
+          className="bg-gray-100 rounded-xl w-full h-full flex items-center justify-start text-black p-8">
         </div>
-      </SwiperSlide> */}
+      </SwiperSlide>
     </Swiper>
   );
 }

@@ -71,6 +71,7 @@ export default function CheckoutPage() {
     }
 
     async function handleFinalizeAddress(data: AddressType) {
+        console.log({ data })
         setFinalizedAddress(data)
         // call api to attach address and shipping method to the order
         try {
@@ -149,7 +150,7 @@ export default function CheckoutPage() {
                     isDisabled={!totalPayable}
                     className="w-full my-4"
                     color="success"
-                    // onPress={redirectToPaymentGateway}
+                // onPress={redirectToPaymentGateway}
                 >
                     {content.pay}
                 </Button>
