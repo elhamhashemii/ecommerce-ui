@@ -180,7 +180,7 @@ export default function ProfilePage() {
                 {loading ? <LoadingProfile /> :
                     <>
                         <Card shadow="sm" radius="sm" className="p-4 flex flex-col gap-2">
-                            {userAddresses && userAddresses.length && userAddresses?.length > 0 &&
+                            {(userAddresses && userAddresses.length && userAddresses?.length > 0) ?
                                 userAddresses.map((item: AddressType, index: number) => {
                                     return <ul className="text-sm w-full" key={item?.id}>
                                         <li className="w-full">
@@ -204,7 +204,7 @@ export default function ProfilePage() {
                                             {index + 1 !== userAddresses.length && <Divider className="mt-4" />}
                                         </li>
                                     </ul>
-                                })}
+                                }) : <>{content.noAddress}</>}
 
                         </Card>
                         <Button
