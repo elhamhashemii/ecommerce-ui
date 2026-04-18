@@ -7,6 +7,10 @@ import { Card } from "@heroui/card"
 import { getUserCart } from "@/actions/client/clientActions"
 import { CartItemType } from "@/types/product"
 import { mergeCarts } from "@/utils/helpers/main"
+import { content } from "@/config/content"
+import { TbShoppingCartOff } from "react-icons/tb"
+import { Button } from "@heroui/button"
+import Link from "next/link"
 
 export default function CartItems() {
     const [mounted, setMounted] = useState(false)
@@ -69,5 +73,9 @@ export default function CartItems() {
                 className={`${index + 1 < cartItems.length ? "border-b border-b-gray-200 pb-4" : "border-none"} m-2`}
             />
         })}
-    </Card> : <div>Empty Cart</div>
+    </Card> : <Card shadow="sm" className="flex p-4 flex-col items-center justify-center gap-4 w-full">
+        <TbShoppingCartOff size={40} color="gray" />
+        <div className="text-sm text-gray-500">{content.emptyCart}</div>
+        <Button className="w-full text-white" size="sm" color="success" as={Link} href="/shop">{content.shopNow}</Button>
+    </Card>
 }

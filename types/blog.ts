@@ -1,8 +1,15 @@
-export type BlogType = {
+
+export type BlogCategory = {
+    id: number,
+    title: string;
+}
+
+export type BlogItem = {
     id: number;
     title: string;
-    category: string;
     intro: string;
     content: string;
-    img: string;
+    categories: BlogCategory[];
+    imageUrls: string;
+    status?: string;
 }

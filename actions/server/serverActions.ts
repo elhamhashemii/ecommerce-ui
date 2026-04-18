@@ -45,6 +45,14 @@ export async function fetchCategories() {
   return fetcher("/categories", { method: "GET" })
 }
 
+export async function fetchBlogs() {
+  return fetcher("/blogs", { method: "GET" })
+}
+
+export async function fetchBlogById(id: any) {
+  return fetcher(`/blogs/${id}`, { method: "GET" })
+}
+
 export async function sendContactFormInfo(body: any) {
   return fetcher("/notifications/contact-form", { method: "POST", body: JSON.stringify(body) })
 }

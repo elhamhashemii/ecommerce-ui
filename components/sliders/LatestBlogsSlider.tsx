@@ -3,24 +3,24 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
-import ProductCard from "@/components/cards/ProductCard";
-import { ProductType } from "@/types/product";
+import { BlogItem } from "@/types/blog";
+import BlogCard from "../cards/BlogCard";
 
 interface Props {
-    products: ProductType[];
+    blogs: BlogItem[];
 }
 
-export default function BestSellerSlider({ products }: Props) {
+export default function LatestBlogsSlider({ blogs }: Props) {
     return (
         <section className="relative py-10 bg-gradient-to-b from-[#ffffff] to-[#f7f7f9] overflow-hidden rounded-xl">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
                 <h2 className="font-bold text-lg sm:text-xl mb-2">
-                    محبوب‌ترین‌ها 💛
+                    جدیدترین مقالات 📚
                 </h2>
 
                 <p className="text-sm text-gray-500 mb-6">
-                    محصولاتی که همیشه اولین انتخاب مشتری‌ها هستند.
+                    لورم ایپسوم متن ساختگی است.
                 </p>
 
                 <Swiper
@@ -37,9 +37,9 @@ export default function BestSellerSlider({ products }: Props) {
                         1280: { slidesPerView: 5 },
                     }}
                 >
-                    {products.map((product) => (
-                        <SwiperSlide key={product.id} className="h-auto p-1">
-                            <ProductCard product={product} />
+                    {blogs.map((blog) => (
+                        <SwiperSlide key={blog.id} className="h-auto p-1">
+                            <BlogCard blog={blog} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

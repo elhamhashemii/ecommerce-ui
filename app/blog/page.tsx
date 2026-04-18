@@ -1,7 +1,9 @@
+import { fetchBlogs } from "@/actions/server/serverActions";
 import BlogSlider from "@/components/sliders/BlogSlider";
-import SampleSlider from "@/components/sliders/SampleSlider";
 
-export default function ShopPage() {
+export default async function ShopPage() {
+    const blogs = await fetchBlogs() as any;
+
     return <div>
         {/* <SampleSlider /> */}
         <div
@@ -15,7 +17,7 @@ export default function ShopPage() {
         </div>
         <div className="text-xl font-bold">جدیدترین مقالات</div>
         <div className="my-8">
-            <BlogSlider />
+            <BlogSlider data={blogs} />
         </div>
     </div>
 }

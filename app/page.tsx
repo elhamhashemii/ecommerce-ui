@@ -2,17 +2,19 @@ import SampleSlider from "@/components/sliders/SampleSlider";
 import ProductsGroup from "@/components/lists/ProductsGroup";
 import { ProductType } from "@/types/product";
 import { productsData } from "@/config/const";
-import { fetchCategories, fetchProducts } from "@/actions/server/serverActions";
+import { fetchBlogs, fetchCategories, fetchProducts } from "@/actions/server/serverActions";
 import SocialMediaSection from "@/components/lists/SocialMediaSection";
 import CategoriesList from "@/components/lists/CategoriesList";
 import BestSellerSlider from "@/components/sliders/BestSellerSlider";
 import { Button } from "@heroui/button";
 import { routes } from "@/lib/routeNames";
 import Link from "next/link";
+import LatestBlogsSlider from "@/components/sliders/LatestBlogsSlider";
 
 export default async function Home() {
   const products: any = await fetchProducts();
   const categories: any = await fetchCategories();
+  const blogs: any = await fetchBlogs();
 
   return (
     <section className="w-full flex flex-col items-center justify-center gap-4">
@@ -38,6 +40,9 @@ export default async function Home() {
           <Button as={Link} color="secondary" href={routes.CONTACT}>با ما درتماس باشید</Button>
         </div>
       </section>
+      <div className="w-full">
+        <LatestBlogsSlider blogs={blogs} />
+      </div>
       <SocialMediaSection />
     </section>
   );

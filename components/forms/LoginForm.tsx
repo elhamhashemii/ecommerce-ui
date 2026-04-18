@@ -152,7 +152,7 @@ export const LoginForm = (props: IProps) => {
     }
 
 
-    return <Card className={`${className} flex flex-col items-center justify-center p-8`}>
+    return <Card className={`${className} max-w-92 flex flex-col items-center justify-center p-8`}>
         {!isOnOTPStep ?
             !noHead && <>
                 <Link href={routes.HOME}>

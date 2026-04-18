@@ -1,80 +1,74 @@
-// 'use client';
-
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-
-// import { Navigation, Pagination } from 'swiper/modules';
-// import BlogCard from '../cards/BlogCard';
-// import { blogsData } from '@/config/const';
-
-// export default function BlogSlider() {
-
-//   return (
-//     <Swiper
-//       modules={[Navigation, Pagination]}
-//       // navigation
-//       pagination={{ clickable: true }}
-//       spaceBetween={10}
-//       slidesPerView={2}
-//       style={{ width: '100%', height: '200px' }}
-//     >
-//       {blogsData.map((item) => {
-//         return <SwiperSlide className="p-1">
-//           <BlogCard key={item.id} blog={item} />
-//         </SwiperSlide>
-//       })}
-//     </Swiper>
-//   );
-// }
-
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-import { Navigation } from 'swiper/modules';
 import BlogCard from '../cards/BlogCard';
-import { blogsData } from '@/config/const';
 import { useState } from 'react';
+import { content } from '@/config/content';
+import { Button } from '@heroui/button';
+import { BlogItem } from '@/types/blog';
 
-export default function BlogSlider() {
+interface IProps {
+  data?: BlogItem[]
+}
+
+export default function BlogSlider({ data }: IProps) {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
+
+  // Function to handle previous slide
+  const handlePrevSlide = () => {
+    if (swiperInstance && !swiperInstance.isBeginning) {
+      swiperInstance.slidePrev();
+    }
+  };
+
+  // Function to handle next slide
+  const handleNextSlide = () => {
+    if (swiperInstance && !swiperInstance.isEnd) {
+      swiperInstance.slideNext();
+    }
+  };
+
   return (
-    <div className="relative w-full">
-      {/* Swiper wrapper */}
+    data && data?.length > 0 ? <div className="relative w-full">
       <Swiper
-        modules={[Navigation]}
-        onSwiper={(swiper) => setSwiperInstance(swiper)}
-        navigation={{
-          nextEl: '.custom-next',
-          prevEl: '.custom-prev',
-        }}
+        onSwiper={setSwiperInstance}
         spaceBetween={10}
-        slidesPerView={2}
-        style={{ width: '100%', height: '300px' }}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          480: { slidesPerView: 2 },
+          640: { slidesPerView: 2.7 },
+          768: { slidesPerView: 3.2 },
+          1024: { slidesPerView: 4.5 },
+          1280: { slidesPerView: 5.5 },
+        }}
+        style={{ width: '100%' }}
       >
-        {/* Custom navigation buttons */}
         <div slot="container-end" className="absolute top-0 left-0 flex items-end justify-end gap-2 p-2">
-          <button className="custom-prev bg-gray-200 px-3 py-1 rounded text-black" onClick={() => {
-            console.log({ swiperInstance })
-            swiperInstance?.slidePrev()
-          }}>Prev</button>
-          <button className="custom-next bg-gray-200 px-3 py-1 rounded" onClick={() => {
-            console.log(swiperInstance)
-            swiperInstance?.slideNext()
-          }}>Next</button>
+          <Button
+            size="sm" variant="bordered"
+            className="custom-prev"
+            onPress={handlePrevSlide}
+          >
+            {content.prev}
+          </Button>
+          <Button
+            size="sm" variant="bordered"
+            className="custom-next"
+            onPress={handleNextSlide}
+          >
+            {content.next}
+          </Button>
         </div>
-        {blogsData.map((item) => (
+        {data ? data.map((item) => (
           <SwiperSlide key={item.id} className="p-1 mt-12">
             <BlogCard blog={item} />
           </SwiperSlide>
-        ))}
+        )) : <>مقاله‌ای یافت نشد.</>}
       </Swiper>
-    </div>
+    </div> : <div className='text-sm'>مقاله‌ای یافت نشد.</div>
   );
 }
 
