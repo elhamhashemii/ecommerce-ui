@@ -46,7 +46,8 @@ export async function fetchCategories() {
 }
 
 export async function fetchBlogs() {
-  return fetcher("/blogs", { method: "GET" })
+  const params = new URLSearchParams();
+  return fetcher(`/blogs?isPublishedOnly=true`, { method: "GET", })
 }
 
 export async function fetchBlogById(id: any) {
