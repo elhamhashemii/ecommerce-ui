@@ -39,8 +39,8 @@ export default function ProductSlider({ products, title, subtitle }: Props) {
                         1280: { slidesPerView: 5 },
                     }}
                 >
-                    {products.map((product) => (
-                        <SwiperSlide key={product.id} className="h-auto">
+                    {products?.map((product) => (
+                        <SwiperSlide key={product.id} className="h-auto p-1">
                             <ProductCard product={product} />
                         </SwiperSlide>
                     ))}

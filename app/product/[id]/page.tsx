@@ -28,7 +28,7 @@ export default async function ProductSinglePage({
             <div className="flex flex-col gap-4 items-start justify-start">
                 <h1 className="text-2xl font-bold">{product.title}</h1>
 
-                <div className="text-gray-600">
+                <div className="text-gray-600 text-sm">
                     {product.description}
                 </div>
 
