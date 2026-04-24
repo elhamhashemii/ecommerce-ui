@@ -7,24 +7,32 @@ import ShopPagination from "@/components/pagination/ShopPagination";
 import { CategoryItem } from "@/components/forms/inputs/CategoriesCheckbox";
 import ShopSlider from "@/components/sliders/ShopSlider";
 
-export default async function ShopPage({
-    searchParams,
-}: {
-    searchParams?: { page?: string; sort?: string; categoryIds?: string, isAvailableOnly?: string; search?: string };
-}) {
-    const page = Number(searchParams?.page ?? 1);
-    const sort = searchParams?.sort || "newest";
-    const search = searchParams?.search;
-    const categoryIds = searchParams?.categoryIds
-        ? searchParams.categoryIds.split(",").map(Number)
+type Props = {
+    searchParams?: Promise<{
+        page?: string
+        sort?: string
+        categoryIds?: string
+        isAvailableOnly?: string
+        search?: string
+    }>
+}
+
+
+export default async function ShopPage({ searchParams }: Props) {
+    const params = await searchParams
+    const page = params?.page || 1
+    const sort = params?.sort || "newest"
+    const search = params?.search
+    const categoryIds = params?.categoryIds
+        ? params.categoryIds.split(",").map(Number)
         : undefined;
 
-    const isAvailableOnly = Boolean(searchParams?.isAvailableOnly)
+    const isAvailableOnly = Boolean(params?.isAvailableOnly)
 
     const limit = 12;
 
     const products: any = await fetchProducts({
-        page,
+        page: +page,
         limit: limit,
         sort,
         categoryIds,
@@ -53,7 +61,7 @@ export default async function ShopPage({
                         products={products.items}
                     />
 
-                    <ShopPagination page={page} totalPages={pagination.totalPages} />
+                    <ShopPagination page={+page} totalPages={pagination.totalPages} />
                 </div>
             </div>
         </div>

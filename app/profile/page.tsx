@@ -16,16 +16,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { Button } from "@heroui/button"
 import { TbDotsVertical, TbEdit, TbTrash } from "react-icons/tb"
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown"
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/modal"
+import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal"
 import AddressForm from "@/components/forms/AddressForm"
 import { toast } from "react-toastify"
-import OrderItems from "@/components/cards/OrderItems"
-import Image from "next/image"
 import { Chip } from "@heroui/chip"
 import { OrderStatusColors, OrderStatusFa } from "@/types"
 import { PriceFormatter } from "@/utils/formatter/PriceFormatter"
 
-export function LoadingProfile() {
+function LoadingProfile() {
     return <Card shadow="sm" radius="sm" className="p-8">
         <Spinner />
     </Card>

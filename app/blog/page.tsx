@@ -1,6 +1,8 @@
 import { fetchBlogs } from "@/actions/server/serverActions";
 import BlogSlider from "@/components/sliders/BlogSlider";
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 export default async function ShopPage() {
     const blogs = await fetchBlogs() as any;
 

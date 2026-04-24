@@ -1,11 +1,10 @@
 "use client";
 
-import { UserType } from "@/types/user";
 import { createContext, useContext, useState, ReactNode } from "react";
 
 const UserContext = createContext<{
-  user: UserType | undefined;
-  setUser: (u: UserType) => void;
+  user: any | undefined;
+  setUser: (u: any) => void;
 }>({
   user: undefined,
   setUser: () => {},
@@ -16,7 +15,7 @@ export function UserProvider({
   initialUser,
 }: {
   children: ReactNode;
-  initialUser: UserType;
+  initialUser: any;
 }) {
   const [user, setUser] = useState(initialUser);
   return (

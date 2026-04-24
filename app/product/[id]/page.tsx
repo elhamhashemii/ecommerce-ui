@@ -7,14 +7,15 @@ import { PriceFormatter } from "@/utils/formatter/PriceFormatter";
 import { Button } from "@heroui/button";
 import { notFound } from "next/navigation";
 
-export default async function ProductSinglePage({
-    params,
-}: {
-    params: { id: string };
-}) {
+type Props = {
+    params: Promise<{ id: string }>
+}
 
-    const product = await fetchProductById(params.id) as any;
-    const related = await fetchRelatedProductById(params.id) as any;
+export default async function ProductSinglePage({ params }: Props) {
+    const { id } = await params
+
+    const product = await fetchProductById(id) as any;
+    const related = await fetchRelatedProductById(id) as any;
 
     if (!product) return notFound();
 

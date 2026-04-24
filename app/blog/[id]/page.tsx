@@ -2,12 +2,19 @@ import { fetchBlogById } from "@/actions/server/serverActions";
 import { BlogCategory } from "@/types/blog";
 import { Chip } from "@heroui/chip";
 import Image from "next/image";
-import { BreadcrumbItem, Breadcrumbs } from "@heroui/breadcrumbs"
 
-export default async function SingleBlogPage({ params }: { params: { id: string } }) {
 
-    const blog = await fetchBlogById(params.id) as any;
-    const { title, intro, categories, id, imageUrls } = blog;
+type Props = {
+    params: Promise<{ id: string }>
+}
+
+
+// @ts-ignore
+export default async function SingleBlogPage({ params }: Props) {
+    const { id } = await params
+
+    const blog = await fetchBlogById(id) as any;
+    const { title, intro, categories, imageUrls } = blog;
     const hasImage = imageUrls && imageUrls.length > 0;
     const img = hasImage ? `https://${imageUrls[0]}` : "";
 

@@ -1,5 +1,3 @@
-import { BlogType } from "@/types/blog"
-
 export const productsData = [
     {
       "id": 1,
@@ -703,7 +701,7 @@ export const productsData = [
     }
   ]
 
-export const blogsData: BlogType[] = [
+export const blogsData: any[] = [
   {
     id: 1,
     title: "blog title",

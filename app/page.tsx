@@ -11,6 +11,8 @@ import { routes } from "@/lib/routeNames";
 import Link from "next/link";
 import LatestBlogsSlider from "@/components/sliders/LatestBlogsSlider";
 
+export const dynamic = 'force-dynamic'
+// export const revalidate = 0
 export default async function Home() {
   const products: any = await fetchProducts();
   const categories: any = await fetchCategories();
