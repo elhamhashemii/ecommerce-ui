@@ -1,4 +1,4 @@
 export const env = {
-    apiUrl: "http://api.tahrir124.ir/api",
-    nextApp: "http://tahrir124.ir"
+    apiUrl: "https://api.tahrir124.ir/api",
+    nextApp: "https://tahrir124.ir"
 }
