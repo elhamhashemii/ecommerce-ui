@@ -20,7 +20,7 @@ export default function LatestBlogsSlider({ blogs }: Props) {
                 </h2>
 
                 <p className="text-sm text-gray-500 mb-6">
-                    لورم ایپسوم متن ساختگی است.
+                    بررسی محصولات٬ نکات کاربردی و پیشنهادهای ویژه
                 </p>
 
                 <Swiper

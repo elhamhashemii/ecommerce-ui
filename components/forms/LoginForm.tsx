@@ -174,10 +174,10 @@ export const LoginForm = (props: IProps) => {
                     <div className="text-sm">{content.dontHaveAnAccount} <span className="font-semibold text-sm px-1 underline text-primary cursor-pointer" onClick={handleSignUp}>{content.createAccount}</span></div>
                     <Button color="primary" className="mt-0" onPress={handleGetOtp} isLoading={isLoading}>{content.submit}</Button>
                     <Button startContent={<FcGoogle size={25} />} variant="bordered" onPress={handleGoogleAuth}>{content.signInWithGoogle}</Button>
-                    <div className="text-xs w-full text-center">ورود شما به معنای پذیرش
+                    {/* <div className="text-xs w-full text-center">ورود شما به معنای پذیرش
                         <a href={routes.TERMS} target="_href" className="font-semibold text-xs underline text-primary cursor-pointer"> شرایط و قوانین پلتفرم </a>
                         است.
-                    </div>
+                    </div> */}
                 </> :
                 <>
                     <Input value={otp} style={{ direction: "ltr" }} onChange={onChangeOTP}

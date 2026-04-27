@@ -60,7 +60,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    developer: "https://elhamhashemi.dev",
+    developer: "https://elhamhashemi.liara.run",
     github: "https://github.com/heroui-inc/heroui",
     twitter: "https://twitter.com/hero_ui",
     docs: "https://heroui.com",

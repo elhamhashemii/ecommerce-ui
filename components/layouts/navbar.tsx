@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
 import UserNavBtn from "../buttons/UserNavBtn";
 import NavbarSearchInput from "../forms/inputs/NavbarSearchInput";
+import { routes } from "@/lib/routeNames";
 
 
 export const Navbar = () => {
@@ -32,7 +33,7 @@ export const Navbar = () => {
 
 
   function routeToLogin() {
-    // router.push
+    router.push(routes.LOGIN)
   }
 
   function routeToProfile() {

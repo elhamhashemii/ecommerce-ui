@@ -39,7 +39,7 @@ import { routes } from "./routeNames";
 // }
 
 // src/lib/fetcher.ts
-const API_BASE = process.env.API_URL || "http://89.42.199.123:9000/api";
+const API_BASE = process.env.API_URL || "http://api.tahrir124.ir/api";
 
 interface FetcherOptions extends RequestInit {
     authRedirect?: boolean; // NEW
