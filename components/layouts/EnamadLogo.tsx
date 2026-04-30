@@ -8,10 +8,10 @@ export default function EnamadLogo() {
             href="https://trustseal.enamad.ir/?id=6011776&Code=rr4vd84z9kqDRUy54l34H64r>"
         >
             <img
+                // @ts-ignore
                 referrerpolicy="origin"
                 src="https://trustseal.enamad.ir/logo.aspx?id=6011776&Code=rr4vd84z9kqDRU>"
-                // @ts-ignore
-                style="cursor:pointer;"
+                // style="cursor:pointer;"
                 alt="enamad"
             />
         </a>
