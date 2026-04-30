@@ -3,6 +3,7 @@ import { BottomAppBar } from "./BottomAppBar"
 import { siteConfig } from "@/config/site"
 import Link from "next/link"
 import { SocialItem } from "@/types/siteConfig"
+import EnamadLogo from "./EnamadLogo"
 
 
 export const Footer = () => {
@@ -18,6 +19,7 @@ export const Footer = () => {
                 </div>
             </div>
         </Card>
+        <EnamadLogo />
         <div className="text-center mt-4 mb-1 hidden md:block" style={{ direction: "ltr" }}>Developed By <Link target="_blank" href={siteConfig.links.developer} className="text-blue-400">Elham Hashemi</Link>💙</div>
-    </footer>
+    </footer >
 }
