@@ -17,41 +17,7 @@ export const Footer = () => {
                     })}
                 </div>
             </div>
-            {/* <div className="flex items-center justify-between gap-4 mx-4 mb-4">
-                <div>
-                    <div className="text-amber-600 mb-2 pb-1">دسترسی سریع</div>
-                    <div>item 1</div>
-                    <div>item 2</div>
-                    <div>item 3</div>
-                    <div>item 4</div>
-                </div>
-                <div>
-                    <div className="text-amber-600 mb-2 pb-1">دسترسی سریع</div>
-                    <div>item 1</div>
-                    <div>item 2</div>
-                    <div>item 3</div>
-                    <div>item 4</div>
-                </div>
-
-                <div>
-                    <div className="text-amber-600 mb-2 pb-1">دسترسی سریع</div>
-                    <div>item 1</div>
-                    <div>item 2</div>
-                    <div>item 3</div>
-                    <div>item 4</div>
-                </div>
-
-                <div>
-                    <div className="text-amber-600 mb-2 pb-1">دسترسی سریع</div>
-                    <div>item 1</div>
-                    <div>item 2</div>
-                    <div>item 3</div>
-                    <div>item 4</div>
-                </div>
-
-            </div> */}
-
         </Card>
-        <div  className="text-center mt-4 mb-1 hidden md:block" style={{direction: "ltr"}}>Developed By <Link target="_blank" href={siteConfig.links.developer} className="text-blue-400">Elham Hashemi</Link>💙</div>
+        <div className="text-center mt-4 mb-1 hidden md:block" style={{ direction: "ltr" }}>Developed By <Link target="_blank" href={siteConfig.links.developer} className="text-blue-400">Elham Hashemi</Link>💙</div>
     </footer>
 }
